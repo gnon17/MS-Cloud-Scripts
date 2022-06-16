@@ -1,0 +1,1 @@
+remove-printer -name \\192.168.1.155\FollowMe
