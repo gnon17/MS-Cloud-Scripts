@@ -3,7 +3,7 @@ New-Item HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP -For
 
 #Variable Creation
 $RegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
-$ImageDestinationFolder = "c:\MDM"
+$ImageDestinationFolder = "c:\intune"
 $BackgroundFile = "background.jpg"
 $LockscreenFile = "lockscreen.jpg"
 $BackgroundImage = "$ImageDestinationFolder\$BackgroundFile"
