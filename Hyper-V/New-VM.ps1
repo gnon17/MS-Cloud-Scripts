@@ -1,5 +1,5 @@
 $VMName = Read-Host 'Name your VM'
-MKDIR -Path C:\Hyper-V\"$VMName"
+New-Item -Path C:\Hyper-V\ -Name "$VMname" -ItemType Directory -Force
 Copy-Item -Path "C:\Hyper-V\W10_image\image.vhdx" -Destination "C:\Hyper-V\$VMname\$vmname.vhdx" | Out-Null
 New-VM -Name $VMName -Path C:\Hyper-V\$VMName -MemoryStartupBytes 4GB -VHDPath "C:\Hyper-V\$VMname\$vmname.vhdx" -Generation 2 -BootDevice VHD
 Set-VM -Name $VMName -ProcessorCount 2
