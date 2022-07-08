@@ -1,7 +1,5 @@
 #For adding App Registration in Azure AD and Assigning proper API Permissions for Graph
-#The Object ID is for the newly created App Registration. The APIID is for the respective Graph URI. The -Type Role are application permissions.
 #Resources - https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azadapplication?view=azps-7.4.0 | https://docs.microsoft.com/en-us/powershell/module/az.resources/add-azadapppermission?view=azps-7.4.0 | https://docs.microsoft.com/en-us/graph/permissions-reference
-
 
 #Install Necessary Modules
 #Install-Module AZ -Force
