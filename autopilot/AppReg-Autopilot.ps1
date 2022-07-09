@@ -13,7 +13,7 @@ Connect-AzureAD
 #Variables and naming the new AAD Application
 $AppName = Read-Host "Name your App"
 $Today = Get-Date
-$ExpirationDate = (Get-Date).AddDays(14)
+$ExpirationDate = (Get-Date).AddDays(10)
 
 #Create new App Registration and assign ID (ObjectID) to variable
 Write-Host -f Yellow "Creating Azure AD App"
