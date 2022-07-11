@@ -6,7 +6,7 @@
 #Install-Module AzureAD -Force
 
 #Connect to Azure Powershell
-Write-Host -f Yellow "Connecting to AzAccount and AzureAD" 
+Write-Host -f Yellow "Authenticating to your AzAccount and AzureAD target tenant" 
 Connect-AzAccount
 Connect-AzureAD
 
@@ -54,7 +54,7 @@ Tenant ID:          $TenantID
 -------------------
 ============================================================"
 
-#Obtain admin consent for new Azure AD Application
+#Obtain admin consent for new AzureAD app registration
 Write-Host -f Yellow "Press ENTER to launch Browser and obtain Consent for Microsoft Graph permissions. Use the same client credentials you previously used"
 $AppConnectionDetails | clip
 Pause
