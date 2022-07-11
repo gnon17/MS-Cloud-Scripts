@@ -4,7 +4,7 @@ $AppID = ""
 $AppSecret = ""
 $GroupTag = "Autopilot"
 
-#Script
+#RegisterDevice
 Set-ExecutionPolicy Unrestricted -Force
 Install-PackageProvider NuGet -Force -ErrorAction SilentlyContinue
 Install-Script Get-WindowsAutoPilotInfo -Force
