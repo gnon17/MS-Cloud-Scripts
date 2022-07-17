@@ -24,7 +24,6 @@ Start-Sleep -s 5
 
 #Add required permissions for Graph API (reference: https://docs.microsoft.com/en-us/graph/permissions-reference)
 Write-Host -f Yellow "Setting $AppName API Permissions"
-Write-Host -f Yellow "Setting $AppName API Permissions"
 Add-AzADAppPermission -ObjectId $ObjectID -ApiId 00000003-0000-0000-c000-000000000000 -PermissionId 1138cb37-bd11-4084-a2b7-9f71582aeddb -Type Role
 Add-AzADAppPermission -ObjectId $ObjectID -ApiId 00000003-0000-0000-c000-000000000000 -PermissionId 7438b122-aefc-4978-80ed-43db9fcc7715 -Type Role
 Add-AzADAppPermission -ObjectId $ObjectID -ApiId 00000003-0000-0000-c000-000000000000 -PermissionId 7a6ee1e7-141e-4cec-ae74-d9db155731ff -Type Role
