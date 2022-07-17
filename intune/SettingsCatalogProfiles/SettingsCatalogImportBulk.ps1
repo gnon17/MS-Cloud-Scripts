@@ -13,7 +13,7 @@ $Body = @{
   client_secret = $client_Secret 
   }  
 $ConnectGraph = Invoke-RestMethod -Uri "https://login.microsoft.com/$tenant_Id/oauth2/token?api-version=1.0" -Method POST -Body $Body 
-$TimeZone = Get-Content -Path .\TimeZone.json 
+#$TimeZone = Get-Content -Path .\TimeZone.json 
 #==================================================== 
 #Profile 1
 Invoke-RestMethod -UseBasicParsing -Uri "https://graph.microsoft.com/beta/deviceManagement/configurationPolicies" ` 
