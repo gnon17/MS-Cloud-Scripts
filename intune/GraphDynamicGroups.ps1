@@ -77,4 +77,4 @@ $autopilotgrouptag = @{
 }
 New-MgGroup -BodyParameter $autopilotgrouptag
 #=================================================================#
-Disconenct-MgGraph
+Disconnect-MgGraph
