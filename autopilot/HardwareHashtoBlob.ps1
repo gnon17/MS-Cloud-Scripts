@@ -16,7 +16,7 @@ $downloadsource = 'https://aka.ms/downloadazcopy-v10-windows'
 $filename = "azcopy.zip"
 Start-BitsTransfer -Source $downloadsource -Destination $CSVPath\$filename | Out-Null
 Expand-Archive -LiteralPath $CSVPath\azcopy.zip -DestinationPath $CSVPath -Force
-Move-Item -Path $CSVPath\azcopy_windows_amd64_10.15.0\azcopy.exe -Destination $CSVPath
+Move-Item -Path $CSVPath\azcopy_windows_amd64_10.16.0\azcopy.exe -Destination $CSVPath
 CD $CSVPath
 
 #=========================
