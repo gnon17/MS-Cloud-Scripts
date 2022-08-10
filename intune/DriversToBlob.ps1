@@ -24,7 +24,7 @@ CD $CSVPath
 $file = "$CSVPath\$($serialnumber.SerialNumber)-Drivers.csv"
 
 #Storage Account SAS URL
-$sasurl = "https://ganlabsa1.blob.core.windows.net/workstationdrivers?sp=rwl&st=2022-08-09T11:53:12Z&se=2022-08-13T19:53:12Z&spr=https&sv=2021-06-08&sr=c&sig=IQ%2FV70YpEZgL59PkZmR8T0fKdTyb0cddy22aWOaFXBQ%3D"
+$sasurl = "YOUR SAS URL"
 
 #Copy File
 .\azcopy.exe copy $file $sasurl | Out-Null
