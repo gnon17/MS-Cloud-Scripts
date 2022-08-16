@@ -1,0 +1,2 @@
+robocopy %appdata%\Microsoft\Teams\Backgrounds\Uploads\ "%userprofile%\OneDrive - ganlab\TeamsBackgrounds\ " /XO
+robocopy "%userprofile%\OneDrive - ganlab\TeamsBackgrounds\ " %appdata%\Microsoft\Teams\Backgrounds\Uploads\ /XO
