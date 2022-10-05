@@ -1,4 +1,5 @@
-﻿#Script identifies if Bitlocker is enabled and decrypts drive if enabled
+#Script identifies the state of Bitlocker on the device, and takes appropriate action
+#This Script is dependant on Nickolaj Anderson's script located here - https://msendpointmgr.com/2019/10/31/silently-enable-bitlocker-for-hybrid-azure-ad-joined-devices-using-windows-autopilot/
 $Loop = $true
 $BitlockerStatus = Get-BitLockerVolume -MountPoint C:
 If ((($BitlockerStatus.VolumeStatus -eq 'FullyEncrypted') -and ($BitlockerStatus.KeyProtector.KeyProtectorType -contains 'Tpm')) -and ($BitlockerStatus.ProtectionStatus -eq 'On'))
