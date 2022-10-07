@@ -1,4 +1,4 @@
-﻿#Script identifies if Bitlocker is enabled and decrypts drive if enabled
+﻿#Script identifies the current status of bitlocker and takes action depending on current state
 $Loop = $true
 $BitlockerStatus = Get-BitLockerVolume -MountPoint C:
 If ((($BitlockerStatus.VolumeStatus -eq 'FullyEncrypted') -and ($BitlockerStatus.KeyProtector.KeyProtectorType -contains 'Tpm')) -and ($BitlockerStatus.ProtectionStatus -eq 'On'))
