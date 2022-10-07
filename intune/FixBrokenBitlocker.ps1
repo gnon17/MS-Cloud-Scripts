@@ -16,7 +16,6 @@ If ((($BitlockerStatus.VolumeStatus -eq 'FullyEncrypted') -and ($BitlockerStatus
     {
         Write-Host -f Yellow "Drive is Encrypted without protection and no Key Protectors. Disabling Bitlocker and re-encrypting drive with corporate settings. Decryption Key will be uploaded to Azure AD."
         Disable-Bitlocker -MountPoint "C:"
-        #manage-bde -off c:
         while($Loop){
         [int]$encryptionpercentage = Get-BitlockerVolume | Select-Object -expand EncryptionPercentage
         if($encryptionpercentage -ne 0)
