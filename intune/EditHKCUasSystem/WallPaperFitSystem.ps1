@@ -16,9 +16,3 @@ $WallPaperFit = "0"
 # 5 - span
 New-Item $regpath -Force
 New-ItemProperty -Path $RegPath -Name WallPaperStyle -Value $WallPaperFit -PropertyType String -Force | Out-Null
-
-#$SID = Get-ChildItem -path hkcu:\ -recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -like "$userwithoutdomain"}
-#
-#
-#https://stackoverflow.com/questions/16694662/regex-to-remove-what-ever-comes-in-front-of-using-powershell
-#https://stackoverflow.com/questions/8150271/getting-the-values-of-specific-string-values-in-registry-keys-with-powershell 
