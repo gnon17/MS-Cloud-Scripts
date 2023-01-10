@@ -1,0 +1,1 @@
+get-childitem -Path $env:USERPROFILE\Downloads -File -Recurse | Where-Object {$_.Length -gt 1MB} | Where-Object {$_.CreationTime -lt (Get-Date).AddDays(-1)} | Remove-Item -Force

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toast duration="long">
+     <visual>
+        <binding template="ToastGeneric">
+            <text>IT Department Notification</text>
+            <text>You have large files in your downloads folder over 30 days old</text>
+            <image src="c:\programdata\toast\smbnewbanner.png" placement="hero" />
+            <image src="c:\programdata\toast\smb.png" placement="appLogoOverride" hint-crop="circle" />
+        </binding>
+    </visual>
+    <actions>
+        <action content="Open Downloads Folder" arguments="powershell://c:\programdata\toast\Button1-Downloads.ps1" activationType="protocol" />
+        <action content="View these files" arguments="powershell://c:\programdata\toast\button2-gridview.ps1" activationType="protocol" />
+        <action content="Delete these files for me" arguments="powershell://c:\programdata\toast\button3-delete.ps1" activationType="protocol" />
+    </actions>
+</toast> 

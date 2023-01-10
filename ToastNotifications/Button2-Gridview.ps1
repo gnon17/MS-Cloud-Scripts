@@ -1,0 +1,1 @@
+get-childitem -Path $env:USERPROFILE\Downloads -File -Recurse | Where-Object {$_.Length -gt 1MB} | Where-Object {$_.CreationTime -lt (Get-Date).AddDays(-1)} | Select-Object Name,@{Name="MegaBytes";Expression={"{0:F2}" -f ($_.length/1MB)}},LastWriteTime | Out-GridView -Title "Select multiple files by holding CTRL. Click OK to delete. Click Cancel to close." -PassThru | Remove-Item

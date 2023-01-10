@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toast>
+     <visual>
+        <binding template="ToastGeneric">
+            <text>This is the heading text</text>
+            <text>here is some more text you can customize</text>
+            <text>and another line of text if you want</text>
+        </binding>
+    </visual>
+</toast> 
