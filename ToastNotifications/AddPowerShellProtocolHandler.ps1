@@ -1,6 +1,6 @@
 New-PSDrive -PSProvider Registry -Name HKCR -Root HKEY_CLASSES_ROOT
 $RegPath = "HKCR:\powershell\shell\open\command"
-$command = "c:\ProgramData\Toast\ToastScript.cmd %1"
+$command = '"c:\ProgramData\Toast\ToastScript.cmd %1"'
 $defaulticon = "HKCR:\powershell\defaulticon\"
 New-Item $regpath -Force
 New-Item $defaulticon -force
