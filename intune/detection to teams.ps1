@@ -11,7 +11,7 @@ If (($filedetect -and $regdetect -eq $true) -and ($program1 -ne $null)) {
 else {
 $hostname = hostname
 $application = "MyWin32App"
-$myTeamsWebHook  = "https://ganlab.webhook.office.com/webhookb2/70980a5b-0f03-466c-902d-1c64e57b1fd6@d422cde1-afaf-4b32-9a42-11bfc5233470/IncomingWebhook/84536dda23664ed1af7b8cdb00ec6c22/6eab05ca-d60c-4b52-9e70-e5b808767691"
+$myTeamsWebHook  = "YOUR WEBHOOK URL"
 $webhookMessage = [PSCustomObject][Ordered]@{
 "themeColor" = '#0037DA'
 "title"      = "Win32 App No Longer Detected"
