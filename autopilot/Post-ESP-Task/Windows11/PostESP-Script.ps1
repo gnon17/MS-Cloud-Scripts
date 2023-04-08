@@ -17,6 +17,5 @@ while ($true) {
 }
 Write-Host "Process has ended. Restarting Workstation" -Verbose
 disable-scheduledtask -taskname PostESP-Script -ErrorAction SilentlyContinue -Verbose
-#Unregister-ScheduledTask -TaskName PostESP-Script
 start-sleep -Seconds 5
 Restart-Computer -Force -Verbose
