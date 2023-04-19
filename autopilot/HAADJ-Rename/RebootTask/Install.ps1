@@ -1,4 +1,3 @@
-#
 $tempdir = "c:\temp"
 New-Item $tempdir -ItemType Directory -Force
 Copy-Item ".\PostESP-Script.ps1" -Destination $tempdir -Force
