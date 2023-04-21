@@ -1,0 +1,25 @@
+Add-Type -AssemblyName System.Windows.Forms
+$global:balmsg = New-Object System.Windows.Forms.NotifyIcon
+$path = (Get-Process -id $pid).Path
+$balmsg.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path)
+$balmsg.BalloonTipIcon = [System.Windows.Forms.ToolTipIcon]::Warning
+$balmsg.BalloonTipText = ‘Please save and close your work in any Microsoft Office programs. They will be force closed for a software update in 3 minutes'
+$balmsg.BalloonTipTitle = "ATTENTION!"
+$balmsg.Visible = $true
+$balmsg.ShowBalloonTip(20000)
+start-sleep -Seconds 120
+$global:balmsg = New-Object System.Windows.Forms.NotifyIcon
+$path = (Get-Process -id $pid).Path
+$balmsg.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path)
+$balmsg.BalloonTipIcon = [System.Windows.Forms.ToolTipIcon]::Warning
+$balmsg.BalloonTipText = ‘One minute until Microsoft Office applications will be closed and updated'
+$balmsg.BalloonTipTitle = "ATTENTION!"
+$balmsg.Visible = $true
+$balmsg.ShowBalloonTip(20000)
+start-sleep -seconds 60
+#force close office processes
+Stop-Process -Name OUTLOOK -Force -ErrorAction SilentlyContinue
+Stop-Process -Name WINWORD -Force -ErrorAction SilentlyContinue
+Stop-Process -Name POWERPNT -Force -ErrorAction SilentlyContinue
+Stop-Process -Name EXCEL -Force -ErrorAction SilentlyContinue
+.\setup.exe /configure configuration.xml
