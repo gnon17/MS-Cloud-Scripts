@@ -1,0 +1,35 @@
+Import-Module Microsoft.Graph.Identity.DirectoryManagement
+Select-MgProfile -Name "beta"
+Connect-mgGraph -Scopes Device.Read.All, Directory.ReadWrite.All, Directory.AccessAsUser.All
+
+$fullserial = Get-WmiObject win32_bios | select-object -expandproperty "Serialnumber"
+$lastdigit = ($fullserial[-1])
+$OddEven = $lastdigit%2 -as [boolean]
+#Odds are True
+#Evens are False
+$AADdeviceID = Get-MgDeviceManagementManagedDevice | Where -Property devicename -eq $env:COMPUTERNAME | Select-Object -ExpandProperty AzureADDeviceID
+$Id = Get-MgDevice | Where -Property DeviceId -eq $AADdeviceID | Select-Object -ExpandProperty Id
+
+$uri = $null
+$uri = "https://graph.microsoft.com/beta/devices/$Id"
+
+If ($OddEven -eq $true) {
+Write-Host "Serial number is Odd"
+$json = @{
+      "extensionAttributes" = @{
+      "extensionAttribute10" = "OddSerial"
+         }
+  } | ConvertTo-Json
+  
+Invoke-MgGraphRequest -Uri $uri -Body $json -Method PATCH -ContentType "application/json"
+}
+If ($OddEven -eq $False) {
+Write-Host "Serial number is even"
+$json = @{
+      "extensionAttributes" = @{
+      "extensionAttribute10" = "EvenSerial"
+         }
+  } | ConvertTo-Json
+  
+Invoke-MgGraphRequest -Uri $uri -Body $json -Method PATCH -ContentType "application/json"
+}
