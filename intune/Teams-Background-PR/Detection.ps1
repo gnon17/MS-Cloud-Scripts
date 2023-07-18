@@ -1,4 +1,4 @@
-﻿#Checks for Az.Storage module and installs if it doesn't exist
+#Checks for Az.Storage module and installs if it doesn't exist
 Write-Host "Checking for Az.Storage Module..." -ForegroundColor Green 
 $azstoragemodule = Get-Module -name Az.Storage
 if ($azstoragemodule -eq $null) {
@@ -6,14 +6,16 @@ Install-PackageProvider -Scope CurrentUser -Name NuGet -MinimumVersion 2.8.5.201
 install-module az.storage -scope currentuser -Force
 }
 
-$BlobURL = "https://smbtothecloudblob.blob.core.windows.net/"
-$container = 'backgrounds'
+#Connects to storage account and pulls background image file names
+$BlobURL = "https://yourstorageaccountname.blob.core.windows.net/"
+$container = 'yourcontainername'
 $storageaccount = New-AzStorageContext -Anonymous -BlobEndpoint $BlobURL
 $blobs = Get-AzStorageBlob -Container $container -Context $storageaccount
 $Images = $Blobs.name
 $BackgroundDir = "$env:APPDATA\Microsoft\Teams\Backgrounds\Uploads"
 $Backgrounds = Get-ChildItem $BackgroundDir | Select -ExpandProperty Name -ErrorAction SilentlyContinue
 
+#compare file names to see if they exist in the teams backgrounds destination
 $FileComparison = 
 foreach ($image in $images)
 {
