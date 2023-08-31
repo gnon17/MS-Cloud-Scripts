@@ -10,4 +10,4 @@ Invoke-WebRequest -Uri "https://github.com/gnon17/MS-Cloud-Scripts/raw/main/SetA
 C:\Temp\SetACL.exe -on "C:\windows\ServiceProfiles\LocalService\AppData\Local\Microsoft\Ngc" -ot file -actn setowner -ownr "n:administrators"
 C:\Temp\SetACL.exe -on "C:\windows\ServiceProfiles\LocalService\AppData\Local\Microsoft\Ngc" -ot file -actn ace -ace "n:administrators;p:full" -actn rstchldrn -rst DACL
 Remove-Item "C:\windows\ServiceProfiles\LocalService\AppData\Local\Microsoft\Ngc" -recurse -force
-Remove-Item $path\SetACL.exe
+Remove-Item $path\SetACL.exe -Force
