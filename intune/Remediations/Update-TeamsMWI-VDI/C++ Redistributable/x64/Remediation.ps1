@@ -10,6 +10,7 @@ If ($TempDir -eq $False) {
 else {
     write-host "Temp Directory Already Exists"
 }
+#Download and Install
 start-BitsTransfer -Source $Cx64Download -Destination $Cx64dest
 start-process $Cx64dest /quiet -wait
 remove-item $Cx64dest
