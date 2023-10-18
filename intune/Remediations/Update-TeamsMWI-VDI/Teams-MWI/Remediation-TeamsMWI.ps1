@@ -26,5 +26,5 @@ $TeamsMWIGUID = get-package -name 'Teams Machine-Wide Installer' | select -Expan
 start-process msiexec.exe -ArgumentList "/x $TeamsMWIGUID /qn /norestart" -verbose -wait
 start-BitsTransfer -Source $TeamsDownload -Destination $teamsmsidest
 start-process msiexec.exe -ArgumentList "/i $teamsmsidest ALLUSER=1 ALLUSERS=1 /qn" -verbose -wait
-
+#Cleanup installer
 Remove-Item -Path $teamsmsidest
