@@ -26,21 +26,21 @@ start-BitsTransfer -Source $Cx64Download -Destination $Cx64dest
 start-BitsTransfer -Source $Cx86Download -Destination $Cx86dest
 
 #Get Version of installed TeamsMWI and newest MSI
-$TeamsMWIVersion = get-package -name 'Teams Machine-Wide Installer' | select -ExpandProperty Version -ErrorAction SilentlyContinue
+$TeamsMWIVersion = get-package -name 'Teams Machine-Wide Installer' | select -ExpandProperty Version -ErrorAction Ignore
 $TeamsMSI = get-applockerfileinformation -path $teamsmsidest | Select -expandproperty Publisher
 $TeamsMSIVersion = $TeamsMSI.BinaryVersion
 
 #Get Version of Installed WebRTC and newest MSI
-$WebRTCVersion = Get-Package -name 'Remote Desktop WebRTC Redirector Service' | Select-Object -ExpandProperty Version -ErrorAction SilentlyContinue
+$WebRTCVersion = Get-Package -name 'Remote Desktop WebRTC Redirector Service' | Select-Object -ExpandProperty Version -ErrorAction Ignore
 $WebRTCMSI = get-applockerfileinformation -path $WebRTCDestination | Select -expandproperty Publisher
 $WebRTCMSIVersion = $WebRTCMSI.BinaryVersion
 
 #Get Version of installed C++ Redistributable x64 and newest installer
-$Cx64InstalledVersion = get-package -name '*Microsoft Visual C++ 2015-2022 Redistributable (x64)*' | select -ExpandProperty Version -ErrorAction SilentlyContinue
+$Cx64InstalledVersion = get-package -name '*Microsoft Visual C++ 2015-2022 Redistributable (x64)*' | select -ExpandProperty Version -ErrorAction Ignore
 $Cx64NewVersion = (Get-Item $Cx64dest).VersionInfo.FileVersionRaw
 
 #Get Version of installed C++ Redistributable x86 and newest installer
-$Cx86InstalledVersion = get-package -name '*Microsoft Visual C++ 2015-2022 Redistributable (x86)*' | select -ExpandProperty Version -ErrorAction SilentlyContinue
+$Cx86InstalledVersion = get-package -name '*Microsoft Visual C++ 2015-2022 Redistributable (x86)*' | select -ExpandProperty Version -ErrorAction Ignore
 $Cx86NewVersion = (Get-Item $Cx86dest).VersionInfo.FileVersionRaw
 
 #Check for WVD Registry Values and add if values does not exist
@@ -54,12 +54,12 @@ If (($null -eq $TeamsWVDRegValue) -or ($TeamsWVDRegValue -eq "0")) {
 
 #Compare C++ Redistributable x64 Version
 If ($Cx64InstalledVersion -lt $Cx64NewVersion) {
-start-process $Cx64dest /quiet -wait
+start-process $Cx64dest -ArgumentList "/quiet /norestart" -wait
 }
 
 #Compare C++ Redistributable x86 Version
 If ($Cx86InstalledVersion -lt $Cx86NewVersion) {
-start-process $Cx86dest /quiet -wait
+start-process $Cx86dest -ArgumentList "/quiet /norestart" -wait
 }
 
 #Compare WebRTC Version
@@ -69,6 +69,8 @@ start-process msiexec.exe -ArgumentList "/i $WebRTCDestination /qn" -wait
 
 #Compare Teams Version
 If ($TeamsMWIVersion -lt $TeamsMSIVersion) {
+$TeamsMWIGUID = get-package -name 'Teams Machine-Wide Installer' | select -ExpandProperty FastPackageReference
+start-process msiexec.exe -ArgumentList "/x $TeamsMWIGUID /qn /norestart" -verbose -wait
 start-process msiexec.exe -ArgumentList "/i $teamsmsidest ALLUSER=1 ALLUSERS=1 /qn" -verbose -wait
 }
 
