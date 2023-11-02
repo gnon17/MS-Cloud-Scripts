@@ -7,7 +7,7 @@ install-module az.storage -scope currentuser -Force
 }
 
 #Connects to storage account and pulls background image file names
-$BlobURL = "https://smbtothecloudblob.blob.core.windows.net/"
+$BlobURL = "https://<YOURSTORAGEACCOUNT>.blob.core.windows.net/"
 $container = 'backgrounds'
 $storageaccount = New-AzStorageContext -Anonymous -BlobEndpoint $BlobURL
 $blobs = Get-AzStorageBlob -Container $container -Context $storageaccount
@@ -25,9 +25,9 @@ $image -in $backgrounds
 Write-Host "Checking to see if blob container images already exist..." -ForegroundColor Green 
 If ($FileComparison -contains $False) {
 Write-Output "Background Images are Missing"
-#exit 1
+exit 1
 }
 else {
 Write-Output "All background images exist"
-#exit 0
+exit 0
 }
