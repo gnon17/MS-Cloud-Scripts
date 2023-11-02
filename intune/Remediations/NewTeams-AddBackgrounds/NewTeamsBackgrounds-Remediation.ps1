@@ -14,7 +14,7 @@ install-module az.storage -scope currentuser -Force
 }
 
 #Variables for blob connection and download
-$BlobURL = "https://smbtothecloudblob.blob.core.windows.net/"
+$BlobURL = "https://<YOURSTORAGEACCOUNT>.blob.core.windows.net/"
 $container = 'backgrounds'
 $storageaccount = New-AzStorageContext -Anonymous -BlobEndpoint $BlobURL
 $blobs = Get-AzStorageBlob -Container $container -Context $storageaccount
