@@ -3,7 +3,7 @@ Write-Host "Checking for Teams background directory..." -ForegroundColor Green
 $BackgroundDir = "$env:LOCALAPPDATA\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams\Backgrounds\Uploads"
 $DirExists = Test-Path $BackgroundDir
 If ($DirExists -ne $True) {
-New-Item -Path "$env:LOCALAPPDATA\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams\Backgrounds\Uploads" -Name Uploads -ItemType Directory
+New-Item -Path "$env:LOCALAPPDATA\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams\Backgrounds" -Name Uploads -ItemType Directory
 }
 
 #Checks for Az.Storage module and installs if it doesn't exist
