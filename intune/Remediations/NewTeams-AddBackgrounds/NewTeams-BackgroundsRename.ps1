@@ -1,4 +1,4 @@
-#Directory where your images are stored (Change Accordingly)
+#Directory where your images are stored (Change $backgroundsdir to your location)
 $backgroundsdir = "C:\temp\TeamsBackgrounds"
 $renamedbackgrounds = New-Item -Path "$backgroundsdir" -Name RenamedBackgrounds -ItemType Directory -Force
 
