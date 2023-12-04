@@ -1,5 +1,5 @@
 param(
-	[Parameter(mandatory = $true,HelpMessage='The amount of days since profiles were last modified. Default value is -30 if this is not set')]
+	[Parameter(mandatory = $true)]
 	[INT32]$daysold,
 	 
 	[Parameter(mandatory = $true)]
@@ -8,22 +8,22 @@ param(
 	[Parameter(mandatory = $true)]
 	[string]$storageAccName,
 
-    [Parameter(mandatory = $true)]
+    	[Parameter(mandatory = $true)]
 	[string]$fileShareName,
 
-    [Parameter(mandatory = $true)]
+    	[Parameter(mandatory = $true)]
 	[string]$LogStorageResourceGroup,
 
-    [Parameter(mandatory = $true)]
+    	[Parameter(mandatory = $true)]
 	[string]$logstorageaccount,
 
-    [Parameter(mandatory = $true)]
+    	[Parameter(mandatory = $true)]
 	[string]$logcontainer,
 
-    [Parameter(mandatory = $true)]
+    	[Parameter(mandatory = $true)]
 	[string]$WebhookURL
 )
-#Variables
+
 Enable-AzureRmAlias
 $dateString = (Get-Date).ToString("MM-dd-yyyy")
 $logname = "StaleFSLogix.$dateString.log"
@@ -87,16 +87,17 @@ If ($oldfiles -eq $null) {
     Set-AzureStorageBlobContent -Context $logstoragecontext -Container $logcontainer -File $logname -Blob $logname -Force
 }
 Else {
-Write-Host "Stale profiles were detected. Calculating size and cost savings estimate to send to Teams. $numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Potential cost reduction of $savingsrounded dollars per month if profiles are removed.
+Write-Host "Stale profiles were detected. Calculating size and cost savings estimate to send to Teams. $numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Potential cost reduction of $savingsdollars per month if profiles are removed.
 Review the following profiles for deletion: $oldfiles"
 $numberofprofiles = $oldfiles.Count
 $savings = 0.16*$totalsize
 $savingsrounded = [Math]::Round($savings,2)
 $totalsizerounded = [Math]::Round($totalsize,2)
+$savingsdollars = $savingsrounded.ToString('C',[cultureinfo]$_)
 
 $webhookMessage = [PSCustomObject][Ordered]@{
 "themeColor" = '#0037DA'
-"title"      = "$numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Potential cost reduction of $savingsrounded dollars per month if profiles are removed.
+"title"      = "$numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Potential cost reduction of $savingsdollars per month if profiles are removed.
 Review the following profiles for deletion:"
 "text" = "$oldFiles"
 }
