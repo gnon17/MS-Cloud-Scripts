@@ -1,27 +1,27 @@
 param(
-	[Parameter(mandatory = $true)]
-	[INT32]$daysold,
+[Parameter(mandatory = $true)]
+[INT32]$daysold,
 	 
-	[Parameter(mandatory = $true)]
-	[string]$resourceGroupName,
+[Parameter(mandatory = $true)]
+[string]$resourceGroupName,
 	
-	[Parameter(mandatory = $true)]
-	[string]$storageAccName,
+[Parameter(mandatory = $true)]
+[string]$storageAccName,
 
-    	[Parameter(mandatory = $true)]
-	[string]$fileShareName,
+[Parameter(mandatory = $true)]
+[string]$fileShareName,
 
-    	[Parameter(mandatory = $true)]
-	[string]$LogStorageResourceGroup,
+[Parameter(mandatory = $true)]
+[string]$LogStorageResourceGroup,
 
-    	[Parameter(mandatory = $true)]
-	[string]$logstorageaccount,
+[Parameter(mandatory = $true)]
+[string]$logstorageaccount,
 
-    	[Parameter(mandatory = $true)]
-	[string]$logcontainer,
+[Parameter(mandatory = $true)]
+[string]$logcontainer,
 
-    	[Parameter(mandatory = $true)]
-	[string]$WebhookURL
+[Parameter(mandatory = $true)]
+[string]$WebhookURL
 )
 
 Enable-AzureRmAlias
