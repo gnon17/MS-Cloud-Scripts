@@ -87,13 +87,13 @@ If ($oldfiles -eq $null) {
     Set-AzureStorageBlobContent -Context $logstoragecontext -Container $logcontainer -File $logname -Blob $logname -Force
 }
 Else {
-Write-Host "Stale profiles were detected. Calculating size and cost savings estimate to send to Teams. $numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Potential cost reduction of $savingsdollars per month if profiles are removed.
-Review the following profiles for deletion: $oldfiles"
 $numberofprofiles = $oldfiles.Count
 $savings = 0.16*$totalsize
 $savingsrounded = [Math]::Round($savings,2)
 $totalsizerounded = [Math]::Round($totalsize,2)
 $savingsdollars = $savingsrounded.ToString('C',[cultureinfo]$_)
+Write-Host "Stale profiles were detected. Calculating size and cost savings estimate to send to Teams. $numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Estimated savings of $savingsdollars per month if profiles are removed.
+Review the following profiles for deletion: $oldfiles"
 
 $webhookMessage = [PSCustomObject][Ordered]@{
 "themeColor" = '#0037DA'
