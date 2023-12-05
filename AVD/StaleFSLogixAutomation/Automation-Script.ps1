@@ -68,7 +68,7 @@ catch {
     throw $_.Exception
 }
 
-Write-Host "Setting context for CSV and Log destinations and Looking for Stale FSLogix profiles"
+Write-Host "Setting context for FSLogix storage account and Looking for Stale FSLogix profiles"
 $storagecontext=(Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccName).Context
 $directories=Get-AZStorageFile -Context $storagecontext -ShareName $fileShareName  
 
