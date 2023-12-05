@@ -1,3 +1,30 @@
+<#
+.SYNOPSIS
+  The script can be used in an Azure Automation runbook using a system managed identity to locate FSLogix profiles that have not been modified for a specified number of days 
+.DESCRIPTION
+- Analyze the FSLogix profiles share for profiles that have not been modified for the specified number of days
+- Calculates the total size in GB for the stale profiles 
+- Calculates the estimated savings in Azure spend per month if the stale profiles are deleted. Currently set to the cost of AZ Files Premium GB in the NCUS region ($0.16)
+- Sends a log of the Runbook output and a CSV file of the profiles and their size to a storage account container
+
+.PARAMETER daysold
+    the number of days since profiles have been modified (e.g. -30)
+.PARAMETER resourceGroupName
+    The resource group name where the FSLogix storage account is located
+.PARAMETER StorageAccName
+    The name of the FSLogix storage account
+.PARAMETER fileShareName
+    The name of the FSLogix file share
+.PARAMETER LogStorageResourceGroup
+    The name of the resource group for the storage account where the container for the log and CSV export is located
+.PARAMETER logstorageaccount
+    The name of the storage account for the log and CSV files
+.PARAMETER logcontainer
+    The name of the container for the log and CSV files
+.PARAMETER WebhookURL
+    The Teams webhook URL for the Teams notification
+#>
+
 param(
 [Parameter(mandatory = $true)]
 [INT32]$daysold,
