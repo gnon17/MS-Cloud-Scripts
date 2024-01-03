@@ -1,6 +1,6 @@
 #MAM Configuration Script
     #Creates a MAM_PilotGroup policy with no members
-	#Creates managed app filters for Unmanaged iOS and Unmanaged Android devices
+    #Creates managed app filters for Unmanaged iOS and Unmanaged Android devices
     #Configures MAM baseline App Protection policies for iOS & Android and assigns to the MAM_PilotGroup group 
     #Creates Conditional Access Policy requiring app protection policy and assigns to the MAM_PilotGroup security group
 
