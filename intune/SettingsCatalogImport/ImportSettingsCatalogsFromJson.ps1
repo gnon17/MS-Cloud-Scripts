@@ -29,7 +29,6 @@ else {
 $scopes = "DeviceManagementConfiguration.ReadWrite.All"
 Connect-MgGraph -Scopes $Scopes
 
-#$path = "C:\Users\gpnov\OneDrive\Desktop\Scripts\Templates\"
 $profiles = Get-ChildItem .\ -Filter '*.json'
 Try {
 ForEach ($profile in $profiles) {
