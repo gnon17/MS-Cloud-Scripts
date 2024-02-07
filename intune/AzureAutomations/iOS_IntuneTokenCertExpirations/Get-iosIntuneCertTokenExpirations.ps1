@@ -2,6 +2,7 @@
 #Microsoft.Graph.Beta.DeviceManagement.Administration
 #Microsoft.Graph.Beta.Devices.CorporateManagement
 #Microsoft.Graph.Beta.DeviceManagement.Enrollment
+#If emailing, Microsoft.Graph.Users.Actions
 
 param(
 	[Parameter(mandatory = $true)]
@@ -54,7 +55,43 @@ $webhookMessage = [PSCustomObject][Ordered]@{
     "ContentType" = 'application/json'
     }
 Invoke-RestMethod @webhookCall
+
+#######Send Email Template##########
+#$senderemail = "thesenderemail@domain.com"
+#$recipient = "recipienteamil@domain.com"
+#$subject = "Expiration Warning - Intune iOS Cert or Token"
+#$body = "An iOS MDM Certificate or Token is expiring in less than 30 days. Verify expiration dates below:
+
+#Apple MDM  Push Certificate Expiration:     $certexpiration 
+#Apple VPP Token Expiration:                 $tokenexpiration
+#Apple Enrollment Program Token Expiration:  $EPTExpiration
+
+#Click the link below for renewal details: 
+#https://learn.microsoft.com/en-us/intune-education/renew-ios-certificate-token"
+#$type = "Text"
+#$save = "true"
+
+#$params = @{
+#    Message         = @{
+#        Subject       = $subject
+#        Body          = @{
+#            ContentType = $type
+#            Content     = $body
+#        }
+#        ToRecipients  = @(
+#            @{
+#                EmailAddress = @{
+#                    Address = $recipient
+#                }
+#            }
+#        )
+#    }
+#    SaveToSentItems = $save
+#}
+#Send-MgUserMail -UserId $senderemail -BodyParameter $params
 }
 Else {
 write-Output "Certificate and tokens are not within 30 days of expiration"
 }
+
+Disconnect-MgGraph
