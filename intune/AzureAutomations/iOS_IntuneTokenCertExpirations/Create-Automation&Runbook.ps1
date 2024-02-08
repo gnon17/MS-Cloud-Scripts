@@ -137,7 +137,7 @@ $permissions = 'DeviceManagementServiceConfig.Read.All'
 
 ForEach ($permission in $permissions) {
 $GraphResource = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-000000000000'"
-$approle = $GraphResource.AppRoles | Where-Object {$_.value -eq 'DeviceManagementServiceConfig.Read.All'}
+$approle = $GraphResource.AppRoles | Where-Object {$_.value -eq $permission}
 New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $ServicePrincipalId -PrincipalId $ServicePrincipalId -AppRoleId $approle.Id -ResourceId $GraphResource.Id
 }
 
