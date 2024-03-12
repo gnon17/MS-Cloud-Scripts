@@ -148,8 +148,8 @@ $runbookParams = @{
     resourceGroupName = $SAresourceGroupName
     storageAccName = $storageAccName
     fileShareName = $fileShareName
-    $recipientemail = $recipientemail
-    $senderemail = $SharedMailboxSmtp
+    recipientemail = $recipientemail
+    senderemail = $SharedMailboxSmtp
 }
 
 #Link Schedule to Runbook and Assign Params
@@ -171,7 +171,7 @@ $approle = $GraphResource.AppRoles | Where-Object {$_.value -eq $permission}
 New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $ServicePrincipalId -PrincipalId $ServicePrincipalId -AppRoleId $approle.Id -ResourceId $GraphResource.Id
 }
 
-Disconnect-ExchangeOnline
+Disconnect-ExchangeOnline -Confirm:$false
 Disconnect-AzAccount
 Disconnect-MgGraph
 Stop-Transcript
