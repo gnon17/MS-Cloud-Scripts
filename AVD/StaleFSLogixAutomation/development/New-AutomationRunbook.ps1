@@ -10,7 +10,13 @@ param(
 [string]$storageAccName,
 
 [Parameter(mandatory = $true)]
-[string]$fileShareName
+[string]$fileShareName,
+
+[Parameter(mandatory = $true)]
+[string]$recipientemail,
+
+[Parameter(mandatory = $true)]
+[string]$senderemail
 )
 
 $dateString = (Get-Date).ToString("MM-dd-yyyy")
@@ -66,8 +72,8 @@ $outputfiltered | Export-CSV $csvname
 If ($null -eq $output) {
 Write-Host "No stale profiles were found. Sending Teams message."
 #Generate and send email
-$senderemail = "FSLogixNotifications@tre.org"
-$recipient = "wipfli-admin@tre.org"
+$senderemail = $senderemail
+$recipient = $recipientemail
 $subject = "No Stale FSLogix Profiles Detected"
 $body = "No stale FSLogix profiles were detected. All profiles have been used within the last 45 days."
 
@@ -105,8 +111,8 @@ $savings = 0.16*$totalsize
 #Review the following profiles for deletion: $oldfiles"
 
 #Generate and send email
-$senderemail = "fslogixnotifications@tre.org"
-$recipient = "wipfli-admin@tre.org"
+$senderemail = $senderemail
+$recipient = $recipientemail
 $subject = "Stale FSLogix Profiles"
 $body = "$numberofprofiles FSLogix profiles have not been used in 45+ days. Please review the attachment for any profiles that can be deleted."
 $attachmentpath = "$pwd\$csvname"

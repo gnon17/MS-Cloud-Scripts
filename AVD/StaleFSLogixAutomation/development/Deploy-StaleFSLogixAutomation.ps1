@@ -24,7 +24,13 @@ param(
     [string]$SAresourceGroupName,
 
     [Parameter(mandatory = $true)]
-    [string]$fileShareName
+    [string]$fileShareName,
+
+    [Parameter(mandatory = $true)]
+    [string]$recipientemail,
+
+    [Parameter(mandatory = $false)]
+    [string]$SharedMailboxName = "FSLogixNotifications"
 )
 
 Write-Host -ForegroundColor DarkYellow "Checking for log directory C:\temp for transcript"
@@ -78,7 +84,6 @@ New-AzResourceGroup -Name $ResourceGroupName -Location $AzureRegion
 New-AzAutomationAccount -Name $AutomationAccount -Location $AzureRegion -ResourceGroupName $ResourceGroupName -AssignSystemIdentity
 
 #Download the Runbook file from Github
-############# <---------------------------------------------------------------------------Fix This
 $runbookfilename = "New-AutomationRunbook.ps1"
 $runbookurl = "https://raw.githubusercontent.com/gnon17/MS-Cloud-Scripts/main/AVD/StaleFSLogixAutomation/development/New-AutomationRunbook.ps1"
 Invoke-WebRequest -Uri $runbookurl -OutFile "$pwd\$runbookfilename"
@@ -132,12 +137,19 @@ $param = @{
     }
 New-AzAutomationSchedule @param
 
+#Create Shared Mailbox
+Connect-ExchangeOnline
+New-Mailbox -Shared -Name $SharedMailboxName -Displayname $SharedMailboxName
+$SharedMailboxSmtp = get-mailbox -identity $SharedMailboxName | Select-Object -ExpandProperty "PrimarySMTPAddress"
+
 #Runbook Parameters
 $runbookParams = @{
     daysold = $daysold
     resourceGroupName = $SAresourceGroupName
     storageAccName = $storageAccName
     fileShareName = $fileShareName
+    $recipientemail = $recipientemail
+    $senderemail = $SharedMailboxSmtp
 }
 
 #Link Schedule to Runbook and Assign Params
@@ -158,10 +170,6 @@ $GraphResource = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c0
 $approle = $GraphResource.AppRoles | Where-Object {$_.value -eq $permission}
 New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $ServicePrincipalId -PrincipalId $ServicePrincipalId -AppRoleId $approle.Id -ResourceId $GraphResource.Id
 }
-
-#Create Shared Mailbox
-Connect-ExchangeOnline
-New-Mailbox -Shared -Name "FSLogixNotifications" -Displayname "FSLogixNotifications"
 
 Disconnect-ExchangeOnline
 Disconnect-AzAccount
