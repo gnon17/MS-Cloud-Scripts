@@ -66,8 +66,8 @@ $outputfiltered | Export-CSV $csvname
 If ($null -eq $output) {
 Write-Host "No stale profiles were found. Sending Teams message."
 #Generate and send email
-$senderemail = "FSLogixNotifications@tre.org"
-$recipient = "wipfli-admin@tre.org"
+$senderemail = "FSLogixNotifications@domain.com"
+$recipient = ""
 $subject = "No Stale FSLogix Profiles Detected"
 $body = "No stale FSLogix profiles were detected. All profiles have been used within the last 45 days."
 
@@ -105,8 +105,8 @@ $savings = 0.16*$totalsize
 #Review the following profiles for deletion: $oldfiles"
 
 #Generate and send email
-$senderemail = "fslogixnotifications@tre.org"
-$recipient = "wipfli-admin@tre.org"
+$senderemail = ""
+$recipient = ""
 $subject = "Stale FSLogix Profiles"
 $body = "$numberofprofiles FSLogix profiles have not been used in 45+ days. Please review the attachment for any profiles that can be deleted."
 $attachmentpath = "$pwd\$csvname"
