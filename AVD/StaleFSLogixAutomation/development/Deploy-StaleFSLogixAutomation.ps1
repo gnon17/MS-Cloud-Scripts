@@ -41,6 +41,10 @@ If ($LogPathExists -ne $True) {
 }
 Start-Transcript -Path $LogPath\NewiOSMDMAutomation.log -Force
 
+If ($daysold -gt 0) {
+    $daysold = -$daysold
+}
+
 #Check for modules and install
 #add Microsoft.Graph.Users.Actions for email
 $modules = 'Az.Accounts', 'Az.ManagedServiceIdentity', 'Az.Resources', 'Az.Automation', 'Microsoft.Graph.Authentication', 'Microsoft.Graph.Applications', 'ExchangeOnlineManagement'
