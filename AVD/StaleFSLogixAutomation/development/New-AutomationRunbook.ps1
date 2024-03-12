@@ -39,7 +39,6 @@ catch {
     throw $_.Exception
 }
 
-Set-AzContext -Subscription "4e9e2233-2576-4eec-b36f-0e56b48c9c75"
 Write-Host "Setting context for FSLogix storage account and Looking for Stale FSLogix profiles"
 $storagecontext = (Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccName).Context
 
