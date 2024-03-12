@@ -46,7 +46,7 @@ $storagecontext = (Get-AzStorageAccount -ResourceGroupName $resourceGroupName -N
 $profilefolders = Get-AZStorageFile -ShareName $fileShareName -context $storagecontext | Select -ExpandProperty Name
 $output = Try {
 ForEach ($profilefolder in $profilefolders) {
-Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $storagecontext | Get-AZStorageFile | Where-Object LastModified -lt $agelimit | Select Name,LastModified -ErrorAction Continue
+Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $storagecontext | Get-AZStorageFile | Where-Object LastModified -lt $agelimit | Select-Object Name,LastModified -ErrorAction Continue
 }
 }
 catch {

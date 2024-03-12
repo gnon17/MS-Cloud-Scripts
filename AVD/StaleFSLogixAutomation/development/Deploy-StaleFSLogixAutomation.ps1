@@ -71,7 +71,7 @@ $subs = Get-AzSubscription | Select-Object Name,Id
 $subscount = Get-AzSubscription | Measure-Object | Select-Object -expandproperty Count
 If ($subscount -gt "1") {
     Write-Host -ForegroundColor DarkYellow "There are multiple Azure Subscriptions. Select the subscription you want to use"
-    Write-Output $($subs) | FT
+    Write-Output $($subs) | Format-Table
     $subID = Read-Host "Enter the Azure subscription ID you want to select"
     Select-AzSubscription -SubscriptionID $subID
 }
