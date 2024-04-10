@@ -43,32 +43,21 @@ Write-Host "Setting context for FSLogix storage account and Looking for Stale FS
 $storagecontext = (Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccName).Context
 
 $profilefolders = Get-AZStorageFile -ShareName $fileShareName -context $storagecontext | Select -ExpandProperty Name
-$output = Try {
+$files = Try {
 ForEach ($profilefolder in $profilefolders) {
-Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $storagecontext | Get-AZStorageFile | Where-Object LastModified -lt $agelimit | Select-Object Name,LastModified -ErrorAction Continue
+Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $storagecontext | Get-AZStorageFile | Where-Object {$_.LastModified -lt $agelimit -and $_.Name -notmatch '.metadata' -and $_.Name -match '.VHDX'} | Select-Object Name,LastModified,length -ErrorAction Continue
 }
 }
 catch {
     Write-Error -Message $_.Exception
     throw $_.Exception
 }
+$files
+$files | export-csv $csvname
+$size = ($files | Measure-Object Length -sum).sum
+$totalsize = $size / 1gb
 
-$outputfiltered = $output | Where-Object {$_.Name -notmatch '.metadata' -and $_.Name -match '.VHDX'}
-$outputfiltered | Export-CSV $csvname
-
-#foreach ($directory in $directories)  
-#    {  
-#        $size = (Get-AZStorageFile -Context $storagecontext -ShareName $fileShareName -Path $directory.Name | Where-Object LastModified -lt $AgeLimit | Measure-Object Length -sum).sum
-#        $sizemb = $size / 1gb
-#        $totalsize += $sizemb 
-#    }
-
-Write-Host "Generating CSV File and setting blob storage container"
-
-$outputfiltered | Export-CSV $csvname
-
-
-If ($null -eq $output) {
+If ($null -eq $files) {
 Write-Host "No stale profiles were found. Sending Teams message."
 #Generate and send email
 $senderemail = $senderemail
@@ -101,19 +90,20 @@ Send-MgUserMail -UserId $senderemail -BodyParameter $params -Verbose
     Stop-Transcript
 }
 Else {
-$numberofprofiles = $outputfiltered.Count
+$numberofprofiles = $files.Count
 $savings = 0.16*$totalsize
-#$savingsrounded = [Math]::Round($savings,2)
-#$totalsizerounded = [Math]::Round($totalsize,2)
-#$savingsdollars = $savingsrounded.ToString('C',[cultureinfo]$_)
-#Write-Host "Stale profiles were detected. Calculating size and cost savings estimate to send to Teams. $numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Estimated savings of $savingsdollars per month if profiles are removed.
-#Review the following profiles for deletion: $oldfiles"
+$savingsrounded = [Math]::Round($savings,2)
+$totalsizerounded = [Math]::Round($totalsize,2)
+$savingsdollars = $savingsrounded.ToString('C',[cultureinfo]$_)
+Write-Host "Stale profiles were detected. Calculating size and cost savings estimate to send to Teams. $numberofprofiles FSLogix profiles totaling $totalsizerounded GB have not been modified in 30+ days. Estimated savings of $savingsdollars per month if profiles are removed.
+Review the following profiles for deletion:"
+Write-Host $files.name
 
 #Generate and send email
 $senderemail = $senderemail
 $recipient = $recipientemail
 $subject = "Stale FSLogix Profiles"
-$body = "$numberofprofiles FSLogix profiles have not been used in 45+ days. Please review the attachment for any profiles that can be deleted."
+$body = "$numberofprofiles FSLogix profiles have not been used in 45+ days totaling $totalsizerounded GB. Estimated savings of $savingsdollars per month if profiles are removed. Review the attachment and delete stale profiles"
 $attachmentpath = "$pwd\$csvname"
 $attachmentmessage = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("$attachmentpath"))
 $attachmentname = $csvname
