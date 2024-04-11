@@ -20,10 +20,12 @@ param(
 )
 
 $dateString = (Get-Date).ToString("MM-dd-yyyy")
-#$logname = "StaleFSLogix.$dateString.log"
-#Start-Transcript $logname -Verbose
 $AgeLimit = (Get-Date).AddDays($daysold)
 $csvname = "StaleFSLogix.$datestring.csv"
+#Fix daysold if its not negative
+If ($daysold -gt 0) {
+  $daysold = -$daysold
+}
 
 Write-Host "Connecting to Azure..."
 try
@@ -41,11 +43,10 @@ catch {
 
 Write-Host "Setting context for FSLogix storage account and Looking for Stale FSLogix profiles"
 $storagecontext = (Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccName).Context
-
-$profilefolders = Get-AZStorageFile -ShareName $fileShareName -context $storagecontext | Select -ExpandProperty Name
+$profilefolders = Get-AZStorageFile -ShareName $fileShareName -context $storagecontext | Select-Object -ExpandProperty Name
 $files = Try {
 ForEach ($profilefolder in $profilefolders) {
-Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $storagecontext | Get-AZStorageFile | Where-Object {$_.LastModified -lt $agelimit -and $_.Name -notmatch '.metadata' -and $_.Name -match '.VHDX'} | Select-Object Name,LastModified,length -ErrorAction Continue
+Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $storagecontext | Get-AZStorageFile | Where-Object {$_.LastModified -lt $agelimit -and $_.Name -notmatch '.metadata' -and $_.Name -match '.VHDX'} | Select-Object Name,LastModified,length
 }
 }
 catch {
@@ -57,9 +58,8 @@ $files | export-csv $csvname
 $size = ($files | Measure-Object Length -sum).sum
 $totalsize = $size / 1gb
 
-If ($null -eq $files) {
-Write-Host "No stale profiles were found. Sending Teams message."
 #Generate and send email
+If ($null -eq $files) {
 $senderemail = $senderemail
 $recipient = $recipientemail
 $subject = "No Stale FSLogix Profiles Detected"
