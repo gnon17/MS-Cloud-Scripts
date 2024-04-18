@@ -37,8 +37,7 @@ try
     Connect-MgGraph -AccessToken $SecureToken -Nowelcome
 }
 catch {
-    Write-Error -Message $_.Exception
-    throw $_.Exception
+    Write-Host $_
 }
 
 Write-Host "Setting context for FSLogix storage account and Looking for Stale FSLogix profiles"
@@ -50,8 +49,7 @@ Get-AZStorageFile -ShareName $fileShareName -Path $profilefolder -context $stora
 }
 }
 catch {
-    Write-Error -Message $_.Exception
-    throw $_.Exception
+    Write-Host $_
 }
 $files
 $files | export-csv $csvname
