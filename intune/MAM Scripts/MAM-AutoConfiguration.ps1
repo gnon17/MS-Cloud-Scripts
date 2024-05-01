@@ -54,7 +54,7 @@ Import-Module Microsoft.Graph.Beta.DeviceManagement
 Import-Module Microsoft.Graph.Beta.Groups
 Import-Module Microsoft.Graph.Beta.Devices.CorporateManagement
 
-$scopes = "Policy.ReadWrite.ConditionalAccess", "Policy.Read.All", "Application.Read.All", "User.Read.All","Group.ReadWrite.All", "Directory.ReadWrite.All", "DeviceManagementConfiguration.ReadWrite.All"
+$scopes = "Policy.ReadWrite.ConditionalAccess", "Policy.Read.All", "Application.Read.All", "User.Read.All","Group.ReadWrite.All", "Directory.ReadWrite.All", "DeviceManagementConfiguration.ReadWrite.All", "DeviceManagementApps.ReadWrite.All"
 
 Connect-MgGraph -Scopes $Scopes
 
