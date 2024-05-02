@@ -46,8 +46,7 @@ If ($daysold -gt 0) {
 }
 
 #Check for modules and install
-#add Microsoft.Graph.Users.Actions for email
-$modules = 'Az.Accounts', 'Az.ManagedServiceIdentity', 'Az.Resources', 'Az.Automation', 'Microsoft.Graph.Authentication', 'Microsoft.Graph.Applications', 'ExchangeOnlineManagement'
+$modules = 'Az.Accounts', 'Az.ManagedServiceIdentity', 'Az.Resources', 'Az.Automation', 'Microsoft.Graph.Authentication', 'Microsoft.Graph.Applications', 'ExchangeOnlineManagement', 'Microsoft.Graph.Users.Actions'
 Write-Host -ForegroundColor DarkYellow "Installing Required Modules if they're missing..."
 Foreach ($module in $modules) {
 if (Get-Module -ListAvailable -Name $module) {
