@@ -8,7 +8,7 @@
   <Triggers>
     <EventTrigger>
       <Enabled>true</Enabled>
-      <Subscription>&lt;QueryList&gt;&lt;Query Id="0" Path="Security"&gt;&lt;Select Path="Security"&gt;*[System[EventID=4647]]&lt;/Select&gt;&lt;/Query&gt;&lt;/QueryList&gt;</Subscription>
+      <Subscription>&lt;QueryList&gt;&lt;Query Id="0" Path="Security"&gt;&lt;Select Path="Security"&gt;*[System[EventID=4738]]&lt;/Select&gt;&lt;/Query&gt;&lt;/QueryList&gt;</Subscription>
     </EventTrigger>
   </Triggers>
   <Principals>
