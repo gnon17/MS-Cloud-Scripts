@@ -4,7 +4,7 @@ New-Item $tempdir -ItemType Directory -Force
 New-Item $taskdir -ItemType File -Name ESP-TaskComplete -Force
 Start-Transcript -Path "C:\temp\post-esp-task.txt" -Verbose
 disable-scheduledtask -taskname PostESP-Reboot -ErrorAction SilentlyContinue -Verbose
-#Unregister-ScheduledTask -TaskName PostESP-Script
+#Unregister-ScheduledTask -TaskName PostESP-Reboot
 
 $Balloon = New-Object System.Windows.Forms.NotifyIcon
 $Balloon.Icon = [System.Drawing.SystemIcons]::Information
