@@ -41,7 +41,7 @@
   <Actions Context="Author">
     <Exec>
       <Command>powershell.exe</Command>
-      <Arguments>-executionpolicy bypass c:\temp\PostESP-Reboot.ps1</Arguments>
+      <Arguments>-executionpolicy bypass c:\temp\PostESP-Reboot-Notification.ps1</Arguments>
     </Exec>
   </Actions>
 </Task>
