@@ -13,8 +13,5 @@ disable-scheduledtask -taskname Post-ESP-Reboot-Notification -Erroraction Contin
 #Unregister-ScheduledTask -TaskName PostESP-Reboot-Notification -Confirm:$false
 
 Remove-Item $tempdir\toast.ps1 -force
-Remove-Item $tempdir\Post-ESP-Reboot.xml -force
-Remove-Item $tempdir\Post-ESP-Reboot-Notification.xml -force
 
 Restart-Computer -Force -Verbose
-
