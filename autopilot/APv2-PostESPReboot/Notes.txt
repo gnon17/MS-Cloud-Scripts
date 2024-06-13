@@ -1,0 +1,1 @@
+Same task, different triggers. WHfB task does not notify users that a reboot is happening in 20 seconds. It will occur right after user enrolls in WHfB.
