@@ -38,7 +38,7 @@ Write-Host -ForegroundColor Green "FSLogix version is $fslogixversion and suppor
 ###Only running the rest of the FSLogix Version check passed###
 
 #Download latest installers
-Write-Host -ForegroundColor Green "Downloading latest installers for New Teams, WebRTC, and C++ Redistributabls"
+Write-Host -ForegroundColor Green "Downloading latest installers for New Teams, WebRTC, and C++ Redistributables"
 start-BitsTransfer -Source $TeamsDownload -Destination $teamsinstalldest
 Invoke-Webrequest -Uri $WebRTCDownload -OutFile $WebRTCDestination
 start-BitsTransfer -Source $Cx64Download -Destination $Cx64dest
