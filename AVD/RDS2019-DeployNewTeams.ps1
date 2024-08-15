@@ -72,9 +72,9 @@ If (($null -eq $SideLoadValue) -or ($SideLoadValue -eq "0")) {
 #    }
 
 #Get Version of Installed WebRTC and newest MSI
-$WebRTCVersion = Get-Package -name 'Remote Desktop WebRTC Redirector Service' | Select-Object -ExpandProperty Version -ErrorAction Ignore
-$WebRTCMSI = get-applockerfileinformation -path $WebRTCDestination | Select -expandproperty Publisher
-$WebRTCMSIVersion = $WebRTCMSI.BinaryVersion
+#$WebRTCVersion = Get-Package -name 'Remote Desktop WebRTC Redirector Service' | Select-Object -ExpandProperty Version -ErrorAction Ignore
+#$WebRTCMSI = get-applockerfileinformation -path $WebRTCDestination | Select -expandproperty Publisher
+#$WebRTCMSIVersion = $WebRTCMSI.BinaryVersion
 
 #Get Version of installed C++ Redistributable x64 and newest installer
 $Cx64InstalledVersion = get-package -name '*Microsoft Visual C++ 2015-2022 Redistributable (x64)*' | select -ExpandProperty Version -ErrorAction Ignore
