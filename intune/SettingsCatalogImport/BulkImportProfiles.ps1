@@ -1,6 +1,19 @@
+#check for module
+$modules = 'Microsoft.Graph.Authentication'
+Write-Host -ForegroundColor DarkYellow "Installing Required Modules if they're missing..."
+Foreach ($module in $modules) {
+if (Get-Module -ListAvailable -Name $module) {
+    Write-Host -ForegroundColor Yellow "$module module is already installed"
+} 
+else {
+    Write-Host -ForegroundColor Yellow "Installing the $module Module for Current User"
+    Install-Module -Name $module -Scope CurrentUser -Force 
+    Write-Host "Installed $module module for current user"
+}
+}
+
 #Variables
 $scopes = "DeviceManagementConfiguration.ReadWrite.All"
-#Policy.ReadWrite.ConditionalAccess, CloudPC.ReadWrite.All, DeviceManagementServiceConfig.ReadWrite.All, RoleAssignmentSchedule.ReadWrite.Directory, Domain.Read.All, Domain.ReadWrite.All, Directory.Read.All, Policy.ReadWrite.ConditionalAccess, DeviceManagementApps.ReadWrite.All, DeviceManagementConfiguration.ReadWrite.All, DeviceManagementManagedDevices.ReadWrite.All, openid, profile, email, offline_access, DeviceManagementRBAC.Read.All, DeviceManagementRBAC.ReadWrite.All
 $jsonpath = "C:\temp\JSON"
 $policyfiles = Get-ChildItem $jsonpath | Select-Object -ExpandProperty Name
 
