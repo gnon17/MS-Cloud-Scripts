@@ -80,7 +80,7 @@ $params = @{
 Connect-MgGraph -scope "DelegatedAdminRelationship.Read.All","DelegatedAdminRelationship.ReadWrite.All", "Directory.Read.All"
 
 #Grab active admin assignment relationship IDs
-$delegatedAdminRelationshipIds = Get-MgTenantRelationshipDelegatedAdminRelationship | Where-Object Status -eq Active | Select-Object -ExpandProperty Id
+$delegatedAdminRelationshipIds = Get-MgTenantRelationshipDelegatedAdminRelationship -All | Where-Object Status -eq Active | Select-Object -ExpandProperty Id
 
 #Assign GDAP roles to group for all active relationships
 ForEach ($delegatedAdminRelationshipId in $delegatedAdminRelationshipIds) {
