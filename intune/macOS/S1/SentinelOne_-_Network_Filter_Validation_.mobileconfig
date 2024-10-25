@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>FilterDataProviderBundleIdentifier</key>
+			<string>com.sentinelone.network-monitoring</string>
+			<key>FilterDataProviderDesignatedRequirement</key>
+			<string>identifier "com.sentinelone.network-monitoring" and anchor apple generic and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "4AYE5J54KN")</string>
+			<key>FilterGrade</key>
+			<string>firewall</string>
+			<key>FilterPackets</key>
+			<false/>
+			<key>FilterSockets</key>
+			<true/>
+			<key>FilterType</key>
+			<string>Plugin</string>
+			<key>PayloadDisplayName</key>
+			<string>Web Content Filter Payload</string>
+			<key>PayloadIdentifier</key>
+			<string>14DDD990-E2D8-4DD1-8CC6-72FEFB5F252B</string>
+			<key>PayloadOrganization</key>
+			<string>JAMF Software</string>
+			<key>PayloadType</key>
+			<string>com.apple.webcontent-filter</string>
+			<key>PayloadUUID</key>
+			<string>14DDD990-E2D8-4DD1-8CC6-72FEFB5F252B</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>PluginBundleID</key>
+			<string>com.sentinelone.extensions-wrapper</string>
+			<key>UserDefinedName</key>
+			<string>SentinelOne Extensions</string>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Authorizes SentinelOne Network Filter automatic validation.</string>
+	<key>PayloadDisplayName</key>
+	<string>SentinelOne - Network Filter Validation</string>
+	<key>PayloadIdentifier</key>
+	<string>7889BE15-9387-4CDD-B2D7-D57B65EDA1E5</string>
+	<key>PayloadOrganization</key>
+	<string>Sentinel Labs, Inc.</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>2C480E0F-AA21-420F-8BC8-0E1AC975BC51</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1">
+	<dict>
+		<key>PayloadUUID</key>
+		<string>6CC41B69-1ED9-4EDE-823B-F4E1B4ACC6BC</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadOrganization</key>
+		<string>Sentinel Labs, Inc.</string>
+		<key>PayloadIdentifier</key>
+		<string>6CC41B69-1ED9-4EDE-823B-F4E1B4ACC6BC</string>
+		<key>PayloadDisplayName</key>
+		<string>SentinelOne - Notification</string>
+		<key>PayloadDescription</key>
+		<string>Forces notifications for SentinelOne Agent</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+		<key>PayloadEnabled</key>
+		<true/>
+		<key>PayloadRemovalDisallowed</key>
+		<true/>
+		<key>PayloadScope</key>
+		<string>System</string>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>PayloadDisplayName</key>
+				<string>Notifications Payload</string>
+				<key>PayloadIdentifier</key>
+				<string>978E305C-D3FD-4256-B0DC-239E3488EF67</string>
+				<key>PayloadOrganization</key>
+				<string>JAMF Softwa�hre</string>
+				<key>PayloadType</key>
+				<string>com.apple.notificationsettings</string>
+				<key>PayloadUUID</key>
+				<string>08B4AAC7-7050-4C8F-B987-33FB20B9DE52</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>NotificationSettings</key>
+				<array>
+					<dict>
+						<key>AlertType</key>
+						<integer>1</integer>
+						<key>BadgesEnabled</key>
+						<true/>
+						<key>BundleIdentifier</key>
+						<string>com.sentinelOne.SentinelAgent</string>
+						<key>CriticalAlertEnabled</key>
+						<true/>
+						<key>NotificationsEnabled</key>
+						<true/>
+						<key>ShowInLockScreen</key>
+						<true/>
+						<key>ShowInNotificationCenter</key>
+						<true/>
+						<key>SoundsEnabled</key>
+						<true/>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</plist>
