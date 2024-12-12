@@ -13,8 +13,8 @@ else {
 }
 
 #Variables
-$scopes = "DeviceManagementConfiguration.ReadWrite.All"
-$jsonpath = "C:\temp\JSON"
+$scopes = "DeviceManagementConfiguration.ReadWrite.All","Policy.ReadWrite.ConditionalAccess","Application.Read.All"
+$jsonpath = "C:\temp\JSOcustom"
 $policyfiles = Get-ChildItem $jsonpath | Select-Object -ExpandProperty Name
 
 Connect-MgGraph -scopes $scopes
