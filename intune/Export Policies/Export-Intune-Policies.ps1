@@ -24,7 +24,6 @@ else {
 
 Connect-MgGraph -Scopes "Policy.Read.All","DeviceManagementConfiguration.Read.All"
 
-
 #Conditional Access Policies
 $path = "C:\temp\CA-Policies"
 New-Item -Path $path -ItemType Directory -Force
@@ -70,9 +69,13 @@ do {
     }
 } while ($nextLink)
 Foreach ($policy in $allPolicies) {
-    $policyDetails = Invoke-MgGraphRequest -Method GET -Uri "$uri$($policy.id)"
-    $policyJson = $policyDetails | ConvertTo-Json -Depth 10
-    $name = $policyDetails.name 
+    $name = $policy.name
+    $id = $policy.id
+    $policy = Invoke-MgGraphRequest -Method GET -Uri $uri/$id -OutputType PSObject
+    $policyconfig = Invoke-MgGraphRequest -Method GET -Uri "$uri$($policy.id)/settings"
+    $policy | Add-Member -MemberType NoteProperty -Name 'settings' -Value @() -Force
+    $policy.settings += $policyconfig.value
+    $policyJson = $policy | ConvertTo-Json -Depth 25 
     $policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
     Write-Host -ForegroundColor Yellow "Exported $name successfully"
 }
