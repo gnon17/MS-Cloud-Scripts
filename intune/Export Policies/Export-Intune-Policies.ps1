@@ -33,28 +33,13 @@ $response = Invoke-MgGraphRequest -Method GET -Uri $uri
 $policyIds = $response.value.id
 Foreach ($policyId in $PolicyIds) {
 $policy = Invoke-MgGraphRequest -Method GET -URI $uri$policyId
-$policyjson = $policy | ConvertTo-Json -Depth 10
+$policyjson = $policy | ConvertTo-Json -Depth 15
 $name = $policy.displayname
 $policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
 write-host -ForegroundColor yellow "Exported $name successfully"
 }
 
-#Custom Device Configuration Profiles
-$path = "C:\temp\DeviceConfigurations"
-New-Item -Path $path -ItemType Directory -Force
-Write-Host -ForegroundColor Green "Exporting Device Configurations to $path"
-$uri = "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations/"
-$response = Invoke-MgGraphRequest -Method GET -Uri $uri
-$policyIds = $response.value.id
-Foreach ($policyId in $PolicyIds) {
-$policy = Invoke-MgGraphRequest -Method GET -URI $uri$policyId
-$policyjson = $policy | ConvertTo-Json -Depth 10
-$name = $policy.displayname
-$policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
-write-host -ForegroundColor yellow "Exported $name successfully"
-}
-
-#Device Configuration Policies
+#Settings Catalog Policies
 $path = "C:\temp\ConfigurationPolicies"
 New-Item -Path $path -ItemType Directory -Force
 Write-Host -ForegroundColor Green "Exporting Configuration Policies to $path"
@@ -89,7 +74,7 @@ $response = Invoke-MgGraphRequest -Method GET -Uri $uri
 $policyIds = $response.value.id
 Foreach ($policyId in $PolicyIds) {
 $policy = Invoke-MgGraphRequest -Method GET -URI $uri$policyId
-$policyjson = $policy | ConvertTo-Json -Depth 10
+$policyjson = $policy | ConvertTo-Json -Depth 15
 $name = $policy.displayname
 $policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
 write-host -ForegroundColor yellow "Exported $name successfully"
@@ -104,10 +89,64 @@ $response = Invoke-MgGraphRequest -Method GET -Uri $uri
 $policyIds = $response.value.id
 Foreach ($policyId in $PolicyIds) {
 $policy = Invoke-MgGraphRequest -Method GET -URI $uri$policyId
-$policyjson = $policy | ConvertTo-Json -Depth 10
+$policyjson = $policy | ConvertTo-Json -Depth 15
 $name = $policy.displayname
 $policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
 write-host -ForegroundColor yellow "Exported $name successfully"
 }
+
+#Custom Device Configuration Profiles
+$path = "C:\temp\DeviceConfigurations"
+New-Item -Path $path -ItemType Directory -Force
+Write-Host -ForegroundColor Green "Exporting Device Configurations to $path"
+$uri = "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations/"
+$response = Invoke-MgGraphRequest -Method GET -Uri $uri
+$policyIds = $response.value.id
+Foreach ($policyId in $PolicyIds) {
+$uridecrypted = "?includeEncryptedData=true"
+$policy = Invoke-MgGraphRequest -Method GET -URI "$uri$policyId$uridecrypted" -OutputType PSObject
+if ($policy.'@odata.type' -eq "#microsoft.graph.windows10CustomConfiguration") {
+    Foreach ($omaSetting in $policy.omaSettings) {
+        if ($omaSetting.isEncrypted -eq $true) {
+        $plainTextUri = "$uri$policyId/getOmaSettingPlainTextValue(secretReferenceValueId='$($omaSetting.secretReferenceValueId)')"
+        $plainTextValue = Invoke-MgGraphRequest -Method GET -Uri $plainTextUri
+        $omasetting.value = $plainTextValue.value
+        $policy.PsObject.Properties.Remove("id")
+        $policy.PsObject.Properties.Remove("lastModifiedDateTime")
+        $omaSetting.PsObject.Properties.Remove("secretReferenceValueId")
+        $omaSetting.PsObject.Properties.Remove("isEncrypted")
+        }
+        else {
+        $policy.PsObject.Properties.Remove("id")
+        $policy.PsObject.Properties.Remove("lastModifiedDateTime")
+        $omaSetting.PsObject.Properties.Remove("secretReferenceValueId")
+        $omaSetting.PsObject.Properties.Remove("isEncrypted")
+        $omaSetting.PsObject.Properties.Remove("isReadOnly")
+        }
+    }
+}
+$policyjson = $policy | ConvertTo-Json -Depth 15
+$name = $policy.displayname
+$policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
+write-host -ForegroundColor yellow "Exported $name successfully"
+}
+
+#Remediations
+$path = "C:\temp\Remediations"
+New-Item -Path $path -ItemType Directory -Force
+Write-Host -ForegroundColor Green "Exporting App Configuration Policies to $path"
+$uri = "https://graph.microsoft.com/beta/deviceManagement/deviceHealthScripts/"
+$response = Invoke-MgGraphRequest -Method GET -Uri $uri
+$policyIds = $response.value.id
+Foreach ($policyId in $PolicyIds) {
+$policy = Invoke-MgGraphRequest -Method GET -URI $uri$policyId -OutputType PSObject
+$policy.PsObject.Properties.Remove("id")
+$policy.PsObject.Properties.Remove("lastModifiedDateTime")
+$policyjson = $policy | ConvertTo-Json -Depth 15
+$name = $policy.displayname
+$policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
+write-host -ForegroundColor yellow "Exported $name successfully"
+}
+
 Stop-Transcript
 Disconnect-MgGraph
