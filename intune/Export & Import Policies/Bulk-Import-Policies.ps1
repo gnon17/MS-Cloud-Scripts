@@ -5,7 +5,6 @@ If ($LogPathExists -ne $True) {
 	New-Item -Path "C:\" -Name Temp -ItemType Directory
 }
 Start-Transcript -Path $LogPath\PolicyExport.log -Force
-
 #check for and install required modules
 $modules = 'Microsoft.Graph.Authentication'
 
@@ -48,7 +47,7 @@ If ($policydata -match "conditionalAccess") {
     $policy.conditions.users.includeRoles = @()
     $policy.conditions.users.includeGuestsOrExternalUsers = $null
     $policy.conditions.users.excludeGuestsOrExternalUsers = $null
-    #If authentication strength is configured then clear out what breaks the JSON import
+    #If authentication strength is configured clear out what breaks the JSON import
     if ($policy.grantControls.authenticationStrength) {
         $policy.grantControls = $policy.grantControls | Select-Object -ExcludeProperty authenticationStrength@odata.context
         $policy.grantControls.authenticationStrength = $policy.grantControls.authenticationStrength | Select-Object id 
