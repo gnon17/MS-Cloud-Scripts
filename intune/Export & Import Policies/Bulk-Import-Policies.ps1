@@ -4,7 +4,7 @@ $LogPathExists = Test-Path $LogPath
 If ($LogPathExists -ne $True) {
 	New-Item -Path "C:\" -Name Temp -ItemType Directory
 }
-Start-Transcript -Path $LogPath\PolicyExport.log -Force
+Start-Transcript -Path $LogPath\PolicyImport.log -Force
 #check for and install required modules
 $modules = 'Microsoft.Graph.Authentication'
 
