@@ -39,6 +39,21 @@ $policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
 write-host -ForegroundColor yellow "Exported $name successfully"
 }
 
+#Named Locations
+$path = "C:\temp\Named Locations"
+New-Item -Path $path -ItemType Directory -Force
+Write-Host -ForegroundColor Green "Exporting Named Locations to $path"
+$uri = "https://graph.microsoft.com/beta/conditionalAccess/namedLocations/"
+$response = Invoke-MgGraphRequest -Method GET -Uri $uri
+$policyIds = $response.value.id
+Foreach ($policyId in $PolicyIds) {
+$policy = Invoke-MgGraphRequest -Method GET -URI $uri$policyId
+$policyjson = $policy | ConvertTo-Json -Depth 15
+$name = $policy.displayname
+$policyJson | Out-File -FilePath "$path\$name.json" -Encoding utf8
+write-host -ForegroundColor yellow "Exported $name successfully"
+}
+
 #Settings Catalog Policies
 $path = "C:\temp\ConfigurationPolicies"
 New-Item -Path $path -ItemType Directory -Force

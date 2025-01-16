@@ -5,6 +5,7 @@ If ($LogPathExists -ne $True) {
 	New-Item -Path "C:\" -Name Temp -ItemType Directory
 }
 Start-Transcript -Path $LogPath\PolicyImport.log -Force
+
 #check for and install required modules
 $modules = 'Microsoft.Graph.Authentication'
 
@@ -21,7 +22,7 @@ else {
 }
 
 #Variables
-$scopes = "Directory.Read.All, DeviceManagementServiceConfig.ReadWrite.All, Domain.Read.All, Domain.ReadWrite.All, Policy.ReadWrite.ConditionalAccess, DeviceManagementApps.ReadWrite.All, DeviceManagementConfiguration.ReadWrite.All, DeviceManagementManagedDevices.ReadWrite.All"
+$scopes = "Directory.Read.All, DeviceManagementServiceConfig.ReadWrite.All, Domain.Read.All, Domain.ReadWrite.All, Policy.ReadWrite.ConditionalAccess, AuthenticationContext.ReadWrite.All, AuthenticationContext.Read.All, Policy.Read.All, DeviceManagementApps.ReadWrite.All, DeviceManagementConfiguration.ReadWrite.All, DeviceManagementManagedDevices.ReadWrite.All, Application.Read.All"
 $jsonpath = "C:\Temp"
 $policyfiles = Get-ChildItem $jsonpath -Filter "*.json" -Recurse
 
@@ -29,36 +30,6 @@ Connect-MgGraph -scopes $scopes
 
 Foreach ($policyfile in $policyfiles) {
 $policydata = Get-Content -path $policyfile.FullName | ConvertFrom-JSON | Select-Object -ExpandProperty '@odata.context' -ErrorAction SilentlyContinue
-$policytype = Get-Content -path $policyfile.FullName | ConvertFrom-JSON | Select-Object -ExpandProperty '@odata.type' -ErrorAction SilentlyContinue
-
-## CA POLICIES ##
-#Clear assignments and import Conditional Access Policies
-If ($policydata -match "conditionalAccess") {
-    Try{
-    Write-Host -ForegroundColor Yellow "Policy type is Conditional Access Policy"
-    Write-Host -ForegroundColor Yellow "Trying to import "$policyfile.name""
-    $policy = Get-Content -path $policyfile | ConvertFrom-Json
-    $policy.state = "disabled"
-    $policy.conditions.users.includeUsers = @("None")
-    $policy.conditions.users.excludeRoles = @()
-    $policy.conditions.users.excludeUsers = @()
-    $policy.conditions.users.excludeGroups = @()
-    $policy.conditions.users.includeGroups = @()
-    $policy.conditions.users.includeRoles = @()
-    $policy.conditions.users.includeGuestsOrExternalUsers = $null
-    $policy.conditions.users.excludeGuestsOrExternalUsers = $null
-    #If authentication strength is configured clear out what breaks the JSON import
-    if ($policy.grantControls.authenticationStrength) {
-        $policy.grantControls = $policy.grantControls | Select-Object -ExcludeProperty authenticationStrength@odata.context
-        $policy.grantControls.authenticationStrength = $policy.grantControls.authenticationStrength | Select-Object id 
-    }
-    $policyjson = $policy | ConvertTo-Json -Depth 15
-    Invoke-MgGraphRequest -Method POST https://graph.microsoft.com/beta/identity/conditionalAccess/policies/ -ContentType "application/json" -Body $policyjson
-    }
-    Catch {
-        Write-Host -ForegroundColor Red "There was an error importing $policyfile.name"
-        Write-Host $_
-        }}
 
 ## Settings Catalog Policies ##
 If ($policydata -match "configurationPolicies") {
@@ -73,7 +44,7 @@ If ($policydata -match "configurationPolicies") {
         Write-Host $_
         }    
 }
-
+     
 ## App Protection Policies ##
 If ($policydata -match "managedAppPolicies") {
     Try {
@@ -88,22 +59,8 @@ If ($policydata -match "managedAppPolicies") {
         }    
 }
 
-## App Configuration Policies ##
-If ($policydata -match "mobileAppConfigurations") {
-    Try {
-    Write-Host -ForegroundColor Yellow "Policy type is App Configuration Policy"
-    Write-Host -ForegroundColor Yellow "Trying to import "$policyfile.name""
-    $policy = Get-Content -path $policyfile
-    Invoke-MgGraphRequest -Method POST https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations/ -ContentType "application/json" -Body $policy
-    }
-    Catch {
-        Write-Host -ForegroundColor Red "There was an error importing $policyfile"
-        Write-Host $_
-        }    
-}
-
 ## Custom Device Config Profiles ##
-If ($policytype -eq "#microsoft.graph.windows10CustomConfiguration" -or "#microsoft.graph.windows10GeneralConfiguration" -or "#microsoft.graph.macOSCustomConfiguration" -or "#microsoft.graph.iosDeviceFeaturesConfiguration" -or "#microsoft.graph.windowsUpdateForBusinessConfiguration" -or "#microsoft.graph.androidWorkProfileGeneralDeviceConfiguration") {
+If ($policydata -match "deviceConfigurations") {
     Try {
     Write-Host -ForegroundColor Yellow "Policy type is Custom Device Configuration Policy"
     Write-Host -ForegroundColor Yellow "Trying to import "$policyfile.name""
@@ -117,7 +74,7 @@ If ($policytype -eq "#microsoft.graph.windows10CustomConfiguration" -or "#micros
         }    
 }
 
-##Remediations##
+## Remediations ##
 If ($policydata -match "deviceHealthScripts") {
     Try {
     Write-Host -ForegroundColor Yellow "Policy type is Remediation"
@@ -135,3 +92,6 @@ else {
     write-host "Policy type not supported for Import with this script"
 }
 }
+
+Stop-Transcript
+Disconnect-MgGraph
