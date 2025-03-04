@@ -7,6 +7,21 @@ If ($LogPathExists -ne $True) {
 }
 Start-Transcript -Path $LogPath\SecurityBaselineImport.log -Force
 
+#check for and install required modules
+$modules = 'Microsoft.Graph.Authentication'
+
+Write-Host -ForegroundColor DarkYellow "Installing Required Modules if they're missing..."
+Foreach ($module in $modules) {
+if (Get-Module -ListAvailable -Name $module) {
+    Write-Host -ForegroundColor Yellow "$module module is already installed"
+} 
+else {
+    Write-Host -ForegroundColor Yellow "Installing the $module Module for Current User"
+    Install-Module -Name $module -Scope CurrentUser -Force 
+    Write-Host "Installed $module module for current user"
+}
+}
+
 $apiUrl = "https://api.github.com/repos/dgulle/Security-Baselines/contents/Windows%20Baseline%2024H2?ref=master"
 
 try {
