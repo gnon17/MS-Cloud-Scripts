@@ -109,7 +109,7 @@ foreach ($configurationpolicy in $configurationPolicies) {
         Write-Host $_
         }    
 }
-     
+
 ## App Protection Policies ##
 Write-Host -ForegroundColor Cyan "Importing App Protection Policies"
 foreach ($managedAppPolicy in $managedAppPolicies) {
