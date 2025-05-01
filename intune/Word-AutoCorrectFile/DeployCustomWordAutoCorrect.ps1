@@ -1,6 +1,6 @@
 $destinationpath = "$env:APPDATA\Microsoft\Office"
 $destexists = test-path $destinationpath
-If (!$desexists) {
+If (!$destexists) {
 New-Item -Path $destinationpath -ItemType Directory -Force
 }
 Copy-Item .\MSO1033.acl -Destination $destinationpath -Force
