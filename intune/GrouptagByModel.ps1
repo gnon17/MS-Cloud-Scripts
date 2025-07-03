@@ -49,5 +49,5 @@ Catch {
         }
 }
 
-Stop-Transcript
 Disconnect-MgGraph
+Stop-Transcript
