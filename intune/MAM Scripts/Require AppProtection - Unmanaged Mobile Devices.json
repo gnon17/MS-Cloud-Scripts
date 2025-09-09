@@ -1,0 +1,101 @@
+﻿{
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "times":  null,
+                       "devices":  {
+                                       "excludeDevices":  [
+
+                                                          ],
+                                       "includeDevices":  [
+
+                                                          ],
+                                       "includeDeviceStates":  [
+
+                                                               ],
+                                       "deviceFilter":  {
+                                                            "rule":  "device.isCompliant -eq True -or device.deviceOwnership -eq \"Company\"",
+                                                            "mode":  "exclude"
+                                                        },
+                                       "excludeDeviceStates":  [
+
+                                                               ]
+                                   },
+                       "applications":  {
+                                            "applicationFilter":  null,
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeApplications":  [
+                                                                        "Office365"
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ]
+                                        },
+                       "deviceStates":  null,
+                       "clientApplications":  null,
+                       "userRiskLevels":  [
+
+                                          ],
+                       "users":  {
+                                     "excludeGroups":  [
+
+                                                       ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+                                                        
+                                                       ],
+                                     "excludeGuestsOrExternalUsers":  null
+                                 },
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "platforms":  {
+                                         "includePlatforms":  [
+                                                                  "android",
+                                                                  "iOS"
+                                                              ],
+                                         "excludePlatforms":  [
+
+                                                              ]
+                                     },
+                       "locations":  null
+                   },
+    "displayName":  "Require AppProtection - Unmanaged Mobile Devices",
+    "sessionControls":  null,
+    "templateId":  null,
+    "partialEnablementStrategy":  null,
+    "state":  "enabled",
+    "grantControls":  {
+                          "authenticationStrength":  null,
+                          "operator":  "OR",
+                          "authenticationStrength@odata.context":  "https://graph.microsoft.com/beta/$metadata#identity/conditionalAccess/policies(\u002728377f70-1cb4-485f-b125-881b3346679c\u0027)/grantControls/authenticationStrength/$entity",
+                          "termsOfUse":  [
+
+                                         ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "builtInControls":  [
+                                                  "compliantApplication"
+                                              ]
+                      }
+}
