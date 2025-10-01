@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SiPolicy xmlns="http://schemas.microsoft.com/DRM/WDAC/2017/PolicySchema">
+  <PolicyID>cd108e0a-6713-4e22-a98b-9c5aadcafcf5</PolicyID>
+  <Version>1</Version>
+  <!-- one or more RuleCollection nodes, e.g. Exe, DLL, Appx, etc. -->
+<RuleCollection Type="Exe" EnforcementMode="Enabled">
+  <FilePublisherRule Id="06fdf5f2-4434-4b6b-b836-59dc1ee29b86" Name="&quot;&quot;, in OPERA GX INSTALLER, from O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" ProductName="OPERA GX INSTALLER" BinaryName="">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="10d0ad50-5220-4ae7-b23a-fb2c81d7561b" Name="CHROME.EXE, in GOOGLE CHROME, from O=GOOGLE LLC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=GOOGLE LLC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" ProductName="GOOGLE CHROME" BinaryName="CHROME.EXE">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="14a0952e-e740-4f5b-9983-68fb308a9a4f" Name="OPERA INTERNET BROWSER, from O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" ProductName="OPERA INTERNET BROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="5d39cf10-ff00-40a7-a81f-6771ee5b69e5" Name="FIREFOX, from O=MOZILLA CORPORATION, L=SAN FRANCISCO, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+       <Conditions>
+           <FilePublisherCondition PublisherName="O=MOZILLA CORPORATION, L=SAN FRANCISCO, S=CALIFORNIA, C=US" ProductName="FIREFOX" BinaryName="*">
+               <BinaryVersionRange LowSection="*" HighSection="*" />
+           </FilePublisherCondition>
+       </Conditions>
+   </FilePublisherRule>
+  <FilePublisherRule Id="162e5a37-462a-4aa2-8e00-c6a309d4db7c" Name="FIREFOX, from O=MOZILLA CORPORATION, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=MOZILLA CORPORATION, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" ProductName="FIREFOX" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="2065bf10-abc5-4e0e-be01-0c0ebbc6806a" Name="&quot;&quot;, in OPERA GX INTERNET BROWSER, from O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" ProductName="OPERA GX INTERNET BROWSER" BinaryName="">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="3f67adfe-d25e-4e0f-9469-13277a461a4e" Name="BRAVE BROWSER, from O=BRAVE SOFTWARE, INC., L=SAN FRANCISCO, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=BRAVE SOFTWARE, INC., L=SAN FRANCISCO, S=CALIFORNIA, C=US" ProductName="BRAVE BROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="4603e22e-3ac8-4ba2-814e-b124fdaacb58" Name="OPERA INSTALLER, from O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=OPERA NORWAY AS, L=OSLO, S=OSLO, C=NO" ProductName="OPERA INSTALLER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="70fd870b-db2b-4ce5-b96c-828997fcbd65" Name="360ÃÂ¥ÃÂ®Ãâ°ÃÂ¥Ãâ¦ÃÂ¨ÃÂ¦ÃÂµÃÂÃÂ¨ÃÂ§ÃËÃÂ¥Ãâ¢ÃÂ¨, from O=BEIJING QIHU TECHNOLOGY CO., LTD., L=BEIJING, S=BEIJING, C=CN" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=BEIJING QIHU TECHNOLOGY CO., LTD., L=BEIJING, S=BEIJING, C=CN" ProductName="360ÃÂ¥ÃÂ®Ãâ°ÃÂ¥Ãâ¦ÃÂ¨ÃÂ¦ÃÂµÃÂÃÂ¨ÃÂ§ÃËÃÂ¥Ãâ¢ÃÂ¨" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="7ad4056c-6707-4669-a271-adad34262b56" Name="GOOGLEUPDATESETUP.EXE, in GOOGLE UPDATE, from O=GOOGLE LLC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=GOOGLE LLC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" ProductName="GOOGLE UPDATE" BinaryName="GOOGLEUPDATESETUP.EXE">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="7f206295-64f3-424f-b526-841364196cdc" Name="FIREFOX.EXE, in FIREFOX, from O=MOZILLA CORPORATION, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=MOZILLA CORPORATION, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US" ProductName="FIREFOX" BinaryName="FIREFOX.EXE">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="81f5cc69-8512-4813-a280-ce09181ab03c" Name="VIVALDI, from O=VIVALDI TECHNOLOGIES AS, L=OSLO, S=OSLO, C=NO" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=VIVALDI TECHNOLOGIES AS, L=OSLO, S=OSLO, C=NO" ProductName="VIVALDI" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="98c628f0-6d03-4607-981e-36f931c106d4" Name="VIVALDI INSTALLER, from O=VIVALDI TECHNOLOGIES AS, L=OSLO, S=OSLO, C=NO" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=VIVALDI TECHNOLOGIES AS, L=OSLO, S=OSLO, C=NO" ProductName="VIVALDI INSTALLER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="bf979a51-5b5f-42ac-a8ad-0f00685b0ad2" Name="&quot;&quot;, in TOR BROWSER, from O=THE TOR PROJECT, INC., L=WINCHESTER, S=NEW HAMPSHIRE, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=THE TOR PROJECT, INC., L=WINCHESTER, S=NEW HAMPSHIRE, C=US" ProductName="TOR BROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="d2af62f9-fd46-4975-9af7-9e536bc6dc10" Name="PUFFINSECUREBROWSER, from O=CLOUDMOSA, INC., L=SARATOGA, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=CLOUDMOSA, INC., L=SARATOGA, S=CALIFORNIA, C=US" ProductName="PUFFINSECUREBROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="e59e3550-2a9c-4e73-9bce-6aec2b564b1b" Name="360ÃÂ¥ÃÂ®Ãâ°ÃÂ¥Ãâ¦ÃÂ¨ÃÂ¦ÃÂµÃÂÃÂ¨ÃÂ§ÃËÃÂ¥Ãâ¢ÃÂ¨, from O=BEIJING QIHU TECHNOLOGY CO., LTD., S=BEIJING, C=CN" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=BEIJING QIHU TECHNOLOGY CO., LTD., S=BEIJING, C=CN" ProductName="360ÃÂ¥ÃÂ®Ãâ°ÃÂ¥Ãâ¦ÃÂ¨ÃÂ¦ÃÂµÃÂÃÂ¨ÃÂ§ÃËÃÂ¥Ãâ¢ÃÂ¨" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="fa19dab2-2852-4342-abd4-6f7835fe5ade" Name="BRAVESOFTWARE UPDATE, from O=BRAVE SOFTWARE, INC., L=SAN FRANCISCO, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=BRAVE SOFTWARE, INC., L=SAN FRANCISCO, S=CALIFORNIA, C=US" ProductName="BRAVESOFTWARE UPDATE" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="ff93f32c-2449-41f3-9c1e-b039cd7a3716" Name="PUFFIN SECURE BROWSER, from O=CLOUDMOSA, INC., L=SARATOGA, S=CALIFORNIA, C=US" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=CLOUDMOSA, INC., L=SARATOGA, S=CALIFORNIA, C=US" ProductName="PUFFIN SECURE BROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="ffa1a30b-d6fa-4d45-9725-900b8db2ea2c" Name="YANDEX, from O=YANDEX LLC, L=MOSCOW, S=MOSCOW, C=RU" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=YANDEX LLC, L=MOSCOW, S=MOSCOW, C=RU" ProductName="YANDEX" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePathRule Id="921cc481-6e17-4653-8f75-050b80acca20" Name="(Default Rule) All files located in the Program Files folder" Description="Allows members of the Everyone group to run applications that are located in the Program Files folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+    <Conditions>
+      <FilePathCondition Path="%PROGRAMFILES%\*" />
+    </Conditions>
+  </FilePathRule>
+  <FilePathRule Id="a61c8b2c-a319-4cd0-9690-d2177cad7b51" Name="(Default Rule) All files located in the Windows folder" Description="Allows members of the Everyone group to run applications that are located in the Windows folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+    <Conditions>
+      <FilePathCondition Path="%WINDIR%\*" />
+    </Conditions>
+  </FilePathRule>
+  <FilePathRule Id="fd686d83-a829-4351-8ff4-27c7de5755d2" Name="(Default Rule) All files" Description="Allows members of the Everyone group to run all applications." UserOrGroupSid="S-1-1-0" Action="Allow">
+    <Conditions>
+      <FilePathCondition Path="*" />
+    </Conditions>
+  </FilePathRule>
+  <FilePublisherRule Id="6a1bb055-19bd-437d-8c8b-54310ef9bf18" Name="UC BROWSER, from O=TAOBAO (CHINA) SOFTWARE CO.,LTD., L=HANGZHOU, S=ZHEJIANG, C=CN" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=TAOBAO (CHINA) SOFTWARE CO.,LTD., L=HANGZHOU, S=ZHEJIANG, C=CN" ProductName="UC BROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="82d3936b-eb6a-4a4a-b4e3-61385e571948" Name="WAVEBROWSER signed by O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" ProductName="WAVEBROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="a74bea67-57b1-453b-b5f4-7bd05f75e2be" Name="WAVEBROWSER INSTALLER signed by O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" ProductName="WAVEBROWSER INSTALLER" BinaryName="*">
+	<BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="e105447d-3d93-4117-bf7d-19b86d3b6e32" Name="WAVESOR SWUPDATER signed by O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" ProductName="WAVESOR SWUPDATER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+  <FilePublisherRule Id="9ceb567d-a351-469a-b7d2-e06d03653093" Name="WAVE BROWSER signed by O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" Description="" UserOrGroupSid="S-1-1-0" Action="Deny">
+    <Conditions>
+      <FilePublisherCondition PublisherName="O=WAVESOR SOFTWARE (EIGHTPOINT TECHNOLOGIES LTD. SEZC), L=GEORGE TOWN, C=KY" ProductName="WAVE BROWSER" BinaryName="*">
+        <BinaryVersionRange LowSection="*" HighSection="*" />
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+</RuleCollection>
+</SiPolicy>
