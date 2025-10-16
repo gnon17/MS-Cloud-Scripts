@@ -41,7 +41,6 @@ $scopes = "Policy.ReadWrite.ConditionalAccess", "Policy.Read.All", "Application.
 Connect-MgGraph -Scopes $Scopes
 
 #########Create MAM Pilot Security Group#####
-
 Write-Host -ForegroundColor DarkYellow "Creating MAM_PilotGroup Security Group"
 try {
     $groupBody = @{
@@ -63,7 +62,7 @@ catch {
 }
 
 #########Managed App Filters#################
-# Managed App Filter - Unmanaged Android Devices
+#Managed App Filter - Unmanaged Android Devices
 Write-Host -ForegroundColor DarkYellow "Creating Managed App Filter for Unmanaged Android Devices"
 try {
     $androidFilterBody = @{
@@ -82,7 +81,7 @@ catch {
     Write-Host -ForegroundColor Red $_
 }
 
-# Managed App Filter - Unmanaged iOS Devices
+#Managed App Filter - Unmanaged iOS Devices
 Write-Host -ForegroundColor DarkYellow "Creating Managed App Filter for Unmanaged iOS Devices"
 try {
     $iosFilterBody = @{
@@ -108,8 +107,6 @@ catch {
 $workingdir = Get-Location
 $policyName = "Unmanaged Android App Protection.json"
 $filePath = Join-Path -Path $workingdir -ChildPath $policyName
-
-# Raw GitHub URL (use raw.githubusercontent.com, not github.com)
 $url = "https://raw.githubusercontent.com/gnon17/MS-Cloud-Scripts/main/intune/MAM%20Scripts/Unmanaged%20Android%20App%20Protection.json"
 
 # Download the JSON file
@@ -163,13 +160,10 @@ catch {
 $workingdir = Get-Location
 $policyName = "Unmanaged iOS App Protection.json"
 $filePath = Join-Path -Path $workingdir -ChildPath $policyName
-
-# Raw GitHub URL (use raw.githubusercontent.com, not github.com)
 $url = "https://raw.githubusercontent.com/gnon17/MS-Cloud-Scripts/main/intune/MAM%20Scripts/Unmanaged%20iOS%20App%20Protection.json"
 
 # Download the JSON file
 Invoke-WebRequest -Uri $url -OutFile $filePath
-
 Write-Host -ForegroundColor Green "Downloaded JSON file to: $filePath"
 
 $policyPath = $filePath
