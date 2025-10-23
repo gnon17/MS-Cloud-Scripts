@@ -35,7 +35,7 @@ Write-Host $_
 start-Sleep 3
 gpupdate /force
 
-#If Entra-Joined - uncomment below and remove gpupdate above
+#If Entra-Joined: Comment out lines 3, 4, 6, and 36. Uncomment what is below this line. 
 <#
 # Set MDM Enrollment URL's
 $key = 'SYSTEM\CurrentControlSet\Control\CloudDomainJoin\TenantInfo\*'
