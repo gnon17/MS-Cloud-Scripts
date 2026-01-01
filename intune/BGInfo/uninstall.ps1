@@ -1,1 +1,0 @@
-Unregister-ScheduledTask -TaskName "BGInfo-Logon" -Confirm:$false -ErrorAction SilentlyContinue
