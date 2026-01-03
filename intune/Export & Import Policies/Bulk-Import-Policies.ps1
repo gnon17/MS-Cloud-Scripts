@@ -22,7 +22,7 @@ else {
 }
 
 #Variables
-$scopes = "Directory.Read.All, DeviceManagementServiceConfig.ReadWrite.All, Domain.Read.All, Domain.ReadWrite.All, Policy.ReadWrite.ConditionalAccess, AuthenticationContext.ReadWrite.All, AuthenticationContext.Read.All, Policy.Read.All, DeviceManagementApps.ReadWrite.All, DeviceManagementConfiguration.ReadWrite.All, DeviceManagementManagedDevices.ReadWrite.All, Application.Read.All"
+$scopes = "Directory.Read.All, DeviceManagementServiceConfig.ReadWrite.All, Domain.Read.All, Domain.ReadWrite.All, Policy.ReadWrite.ConditionalAccess, AuthenticationContext.ReadWrite.All, AuthenticationContext.Read.All, Policy.Read.All, DeviceManagementApps.ReadWrite.All, DeviceManagementConfiguration.ReadWrite.All, DeviceManagementManagedDevices.ReadWrite.All, DeviceManagementScripts.ReadWrite.All, Application.Read.All"
 $jsonpath = "C:\Temp"
 $policyfiles = Get-ChildItem $jsonpath -Filter "*.json" -Recurse
 
