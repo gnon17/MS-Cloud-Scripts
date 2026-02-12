@@ -1,0 +1,1 @@
+SystemSettingsAdminFlows.exe SetCamSystemGlobal location 1
