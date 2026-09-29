@@ -59,27 +59,32 @@ if (Get-Volume -DriveLetter D -ErrorAction SilentlyContinue) {
     exit
 }
 
-#Identify Temp Storage Volume with name based on v6 VM
-$TempStorage = Get-Disk | Where-Object {$_.PartitionStyle -eq 'RAW' -and $_.OperationalStatus -eq 'Online' -and $_.FriendlyName -eq 'Microsoft NVMe Direct Disk v2'}
-
-#Falls back to alternate method if name ever changes
-if (!$TempStorage) {
-    $osDiskNumber = (Get-Partition -DriveLetter C | Get-Disk).Number
-    $TempStorage = Get-Disk | Where-Object {
-        $_.PartitionStyle -eq 'RAW' -and $_.OperationalStatus -eq 'Online' -and $_.Number -ne $osDiskNumber
+#Identify Azure Temp Storage Volume based on NVMe Direct Disk name
+$TempStorage = @(
+    Get-Disk | Where-Object {
+        $_.PartitionStyle -eq 'RAW' -and
+        $_.OperationalStatus -eq 'Online' -and
+        $_.FriendlyName -like '*NVMe Direct Disk*'
     }
-    Write-Log "Temporary storage identified with fallback method. Friendly name of $TempStorage.FriendlyName"
-}
+)
 
-#Stop Script if Temp Storage can't be identified
-if (!$tempstorage) {
-    Write-Log "Temp storage could not be identified. Exiting."
+#Stop Script if Temp Storage can't be positively identified
+if (!$TempStorage -or $TempStorage.Count -eq 0) {
+    Write-Log "Azure NVMe temporary storage could not be identified. Exiting without modifying any disks."
     Write-Log "=== Script Ended ==="
     exit
 }
-else {
-    Write-Log "RAW Temporary storage found. Continuing script."
+
+#Stop Script if multiple matching temp disks are found
+if ($TempStorage.Count -gt 1) {
+    Write-Log "Multiple Azure NVMe temporary disks were detected. This script expects a single temp disk. Exiting without modifying any disks."
+    Write-Log "=== Script Ended ==="
+    exit
 }
+
+$TempStorage = $TempStorage[0]
+
+Write-Log "RAW Azure temporary storage found: Disk $($TempStorage.Number), FriendlyName '$($TempStorage.FriendlyName)'. Continuing script."
 
 #Initialize the Disk, Format, and Name Partition
 try {
